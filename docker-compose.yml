@@ -1,0 +1,15 @@
+### Music-Catalogue-Client ****
+
+version: "3.3"
+services:
+  music-catalogue-frontend:
+    image: music-catalogue-frontend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      ENV: development
+    ports:
+      - "3000:3000"
+    restart: on-failure
+    container_name: music-catalogue-frontend
