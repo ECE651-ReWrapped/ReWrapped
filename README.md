@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Getting Started with Rewrapped: 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Clone the code with your personal access token and run the following commands to get startd.
 
 ## Available Scripts
 
