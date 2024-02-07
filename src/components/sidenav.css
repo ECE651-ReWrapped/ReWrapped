@@ -1,0 +1,23 @@
+/* SideNav.css */
+.sidenav {
+    height: 100%; /* Full-height */
+    width: 250px; /* Set the width of the side navigation */
+    position: fixed; /* Fixed position - stay visible even when the user scrolls down */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black background color */
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+  }
+  
+  .sidenav a {
+    padding: 16px 8px; /* Add some padding */
+    text-decoration: none; /* Remove text decoration */
+    font-size: 20px; /* Increase font size */
+    color: #818181; /* Light grey text color */
+    display: block; /* Make the links fill the whole space */
+  }
+  
+  .sidenav a:hover {
+    color: #f1f1f1; /* Change text color on hover */
+  }
