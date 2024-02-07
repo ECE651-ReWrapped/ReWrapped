@@ -1,30 +1,35 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./routes/privateRoute";
-
-import { Provider } from "react-redux";
-import { store } from "./store";
+import Signup from "./components/Signup";
+import { ErrorPage } from "./pages/ErrorPage";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
 import "./App.css";
 
-const theme = createTheme({
-
-});
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Signup />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "login",
+        element: <Login />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <ProtectedRoute isAuthenticated={true}>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+]);
 
 const App = () => {
-  return (
-    <Provider store={store}>
-      <ThemeProvider theme={theme}>
-          <Router>
-            <Routes>
-              {/* <Route path="/" exact element={<Login />} /> */}
-              <Route element={<ProtectedRoute isAuthenticated={true} />}>
-              </Route>
-            </Routes>
-          </Router>
-      </ThemeProvider>
-    </Provider>
-  );
+  return <RouterProvider router={router} />;
 };
 
 export default App;
