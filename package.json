@@ -14,6 +14,7 @@
     "axios": "^1.5.0",
     "env-cmd": "^10.1.0",
     "history": "^5.3.0",
+    "formik": "^2.4.5",
     "localforage": "^1.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
