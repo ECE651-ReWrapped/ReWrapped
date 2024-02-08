@@ -2,7 +2,10 @@ name: ReWrap CI
 
 on:
   push:
-    branches: [ test-script ]
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
 
 jobs:
   test:
