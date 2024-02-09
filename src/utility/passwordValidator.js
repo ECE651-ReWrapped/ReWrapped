@@ -1,6 +1,8 @@
 //Password validation function to force the inputs on the frontend
 //Between 8-32 characters, One letter, one lower and uppercase letter, One number
-export const passwordValidation = (password) => {
+import * as yup from "yup";
+
+const passwordValidation = (password) => {
   const theLength = /.{8,32}/;
   const numberCase = /[0-9]/;
   const lowerCase = /[a-z]/;
@@ -15,3 +17,16 @@ export const passwordValidation = (password) => {
     return "Password needs one uppercase letter";
   }
 };
+
+const validationSchema = yup.object({
+  email: yup
+    .string("Enter your email")
+    .email("Enter a valid email")
+    .required("Email is required"),
+  password: yup
+    .string("Enter your password")
+    .min(8, "Password should be of minimum 8 characters length")
+    .required("Password is required"),
+});
+
+export { passwordValidation, validationSchema };

@@ -1,20 +1,25 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./routes/privateRoute";
 import Signup from "./components/Signup";
+import Home from "./pages/Home";
 import { ErrorPage } from "./pages/ErrorPage";
-import Login from "./pages/Login";
+import Login from "./components/Login";
 import Dashboard from "./pages/Dashboard";
 import "./App.css";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Signup />,
+    element: <Home />,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "login",
+        index: true,
         element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
       },
     ],
   },
