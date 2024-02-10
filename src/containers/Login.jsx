@@ -124,11 +124,11 @@ const Login = () => {
               Forgot password?
             </Link>
           </Grid>
-          <Grid item xs sx={{ mt: 2, mb: 2 }}>
+          {/* <Grid item xs sx={{ mt: 2, mb: 2 }}>
             <Link href="/signup" variant="body2">
               {"Don't have an account? Sign Up"}
             </Link>
-          </Grid>
+          </Grid> */}
         </Grid>
       </Box>
     </>
