@@ -1,10 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Box, FormControl, Button, InputLabel, Input } from "@mui/material";
+import { Box, Button, TextField, Grid, Typography, Avatar, Link, FormControlLabel, Checkbox } from "@mui/material";
 import { useFormik } from "formik";
 import { validationSchema } from "../utility/passwordValidator";
 // import { useAxios } from "../hooks/useAxios";
 // import { passwordValidation } from "../utility/passwordValidator";
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -45,10 +46,10 @@ const Signup = () => {
 
   const formik = useFormik({
     initialValues: {
-      email: "samudra123@mail.com",
-      name: "abvsdfaf",
-      password: "123456789",
-      confirmPassword: "123456789",
+      email: "",
+      name: "",
+      password: "",
+      confirmPassword: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -59,57 +60,104 @@ const Signup = () => {
 
   return (
     <Box width="50%">
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+            <LockOutlinedIcon />
+          </Avatar>
+        </Grid>
+        <Grid item>
+          <Typography component="h1" variant="h5">
+            Sign up
+          </Typography>
+        </Grid>
+      </Grid>
       <Box component="form" onSubmit={formik.handleSubmit}>
-        <FormControl fullWidth margin="normal">
-          <InputLabel htmlFor="email">Email</InputLabel>
-          <Input
-            id="email"
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </FormControl>
-        <FormControl fullWidth margin="normal">
-          <InputLabel htmlFor="name">Username</InputLabel>
-          <Input
-            id="name"
-            name="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </FormControl>
-        <FormControl fullWidth margin="normal">
-          <InputLabel htmlFor="password">Password</InputLabel>
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </FormControl>
-        <FormControl fullWidth margin="normal">
-          <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-        </FormControl>
+        <TextField
+          fullWidth
+          margin="normal"
+          id="email"
+          name="email"
+          label="Email"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        <TextField
+          fullWidth
+          margin="normal"
+          id="name"
+          name="name"
+          label="Username"
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+        />
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              id="password"
+              name="password"
+              label="Password"
+              type="password"
+              value={formik.values.password}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              fullWidth
+              margin="normal"
+              id="confirmPassword"
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              value={formik.values.confirmPassword}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+          </Grid>
+          <Grid item>
+            <FormControlLabel
+              control={<Checkbox value="allowExtraEmails" color="primary" />}
+              label="I want to receive inspiration, marketing promotions and updates via email."
+              sx={{ color: 'grey' }}
+            />
+          </Grid>
+        </Grid>
         <Button
           type="submit"
           variant="contained"
           color="primary"
           // disabled={loading}
+          style={{
+            marginTop: 20,
+            borderRadius: 25,
+            padding: '10px 20px',
+            fontWeight: 'bold',
+            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+            backgroundColor: 'black',
+            color: 'white',
+            width: '100%',
+          }}
         >
           Sign Up
         </Button>
+        <Grid container justifyContent="flex-end" sx={{mt:2}}>
+          <Grid item>
+            <Link href="/" variant="body2">
+              Already have an account? Sign in
+            </Link>
+          </Grid>
+        </Grid>
       </Box>
     </Box>
   );
