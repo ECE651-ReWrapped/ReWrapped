@@ -1,0 +1,14 @@
+.songCard-container {
+    display: flex;
+}
+
+.songCard-container .image {
+    padding-right: 10px;
+    justify-content: center;
+}
+
+.songCard-container .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
