@@ -1,25 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Box, Button, TextField, Grid, Typography, Avatar, Link, FormControlLabel, Checkbox } from "@mui/material";
+import { Box, Button, TextField, Grid, Typography, Avatar, FormControlLabel, Checkbox, Link } from "@mui/material";
 import { useFormik } from "formik";
 import { validationSchema } from "../utility/passwordValidator";
-// import { useAxios } from "../hooks/useAxios";
-// import { passwordValidation } from "../utility/passwordValidator";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LoginIcon from '@mui/icons-material/Login';
 
-const Signup = () => {
+const Login = () => {
   const navigate = useNavigate();
-  const createUser = async (values) => {
+  const loginUser = async (values) => {
     console.log("Axios request");
     console.log(values);
     try {
       const res = await axios.post(
-        `${process.env.REACT_APP_API_LOCAL}/register`,
+        `${process.env.REACT_APP_API_LOCAL}/login`,
         {
           email: values.email,
-          name: values.name,
           password: values.password,
-          confirmPassword: values.confirmPassword,
         },
         {
           headers: {
@@ -47,14 +43,12 @@ const Signup = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
-      name: "",
       password: "",
-      confirmPassword: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       console.log("This is actually working");
-      await createUser(values);
+      await loginUser(values);
     },
   });
 
@@ -68,12 +62,12 @@ const Signup = () => {
       >
         <Grid item>
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
+            <LoginIcon />
           </Avatar>
         </Grid>
         <Grid item>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign in
           </Typography>
         </Grid>
       </Grid>
@@ -91,48 +85,18 @@ const Signup = () => {
         <TextField
           fullWidth
           margin="normal"
-          id="name"
-          name="name"
-          label="Username"
-          value={formik.values.name}
+          id="password"
+          name="password"
+          label="Password"
+          type="password"
+          value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
         />
-        <Grid container spacing={2}>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              id="password"
-              name="password"
-              label="Password"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          </Grid>
-          <Grid item xs={6}>
-            <TextField
-              fullWidth
-              margin="normal"
-              id="confirmPassword"
-              name="confirmPassword"
-              label="Confirm Password"
-              type="password"
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-          </Grid>
-          <Grid item>
-            <FormControlLabel
-              control={<Checkbox value="allowExtraEmails" color="primary" />}
-              label="I want to receive inspiration, marketing promotions and updates via email."
-              sx={{ color: 'grey' }}
-            />
-          </Grid>
-        </Grid>
+        <FormControlLabel
+          control={<Checkbox value="remember" color="primary" />}
+          label="Remember me"
+        />
         <Button
           type="submit"
           variant="contained"
@@ -149,12 +113,17 @@ const Signup = () => {
             width: '100%',
           }}
         >
-          Sign Up
+          Login
         </Button>
-        <Grid container justifyContent="flex-end" sx={{mt:2}}>
-          <Grid item>
-            <Link href="/" variant="body2">
-              Already have an account? Sign in
+        <Grid container spacing={20}>
+          <Grid item xs sx={{ mt: 2, mb: 2 }}>
+            <Link href="#" variant="body2">
+              Forgot password?
+            </Link>
+          </Grid>
+          <Grid item xs sx={{ mt: 2, mb: 2 }}>
+            <Link href="/signup" variant="body2">
+              {"Don't have an account? Sign Up"}
             </Link>
           </Grid>
         </Grid>
@@ -163,18 +132,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
-
-// const { response, error, loading, refetch } = useAxios({
-//   axiosInstance: axios,
-//   method: "POST",
-//   url: "/register",
-//   requestData: {
-//     userData,
-//   },
-//   requestConfig: {
-//     headers: {
-//       //Custom headers, can't remember if I need this
-//     },
-//   },
-// });
+export default Login;
