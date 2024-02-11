@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ProtectedRoute from "./routes/privateRoute";
-import Signup from "./components/Signup";
+import Signup from "./containers/Signup";
 import Home from "./pages/Home";
 import { ErrorPage } from "./pages/ErrorPage";
-import Login from "./components/Login";
+import Login from "./containers/Login";
 import Dashboard from "./pages/Dashboard";
 import "./App.css";
 

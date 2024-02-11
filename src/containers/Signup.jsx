@@ -10,8 +10,6 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 const Signup = () => {
   const navigate = useNavigate();
   const createUser = async (values) => {
-    console.log("Axios request");
-    console.log(values);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_LOCAL}/register`,
@@ -53,15 +51,15 @@ const Signup = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      console.log("This is actually working");
       await createUser(values);
     },
   });
 
   return (
-    <Box width="50%">
+    <Grid container padding={10}>
       <Grid
         container
+        display={"flex"}
         direction="column"
         justifyContent="center"
         alignItems="center"
@@ -154,12 +152,12 @@ const Signup = () => {
         <Grid container justifyContent="flex-end" sx={{mt:2}}>
           <Grid item>
             <Link href="/" variant="body2">
-              Already have an account? Sign in
+              Already an user? 
             </Link>
           </Grid>
         </Grid>
       </Box>
-    </Box>
+    </Grid>
   );
 };
 
