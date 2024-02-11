@@ -59,6 +59,7 @@ const Signup = () => {
     <>
       <Grid
         container
+        display={"flex"}
         direction="column"
         justifyContent="center"
         alignItems="center"
@@ -148,13 +149,13 @@ const Signup = () => {
         >
           Sign Up
         </Button>
-        {/* <Grid container justifyContent="flex-end" sx={{mt:2}}>
+        <Grid container justifyContent="flex-end" sx={{mt:2}}>
           <Grid item>
             <Link href="/" variant="body2">
-              Already have an account? Sign in
+              Already an user? 
             </Link>
           </Grid>
-        </Grid> */}
+        </Grid>
       </Box>
     </>
   );
