@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Typography, Container, Box } from "@mui/material";
+import ResponsiveAppBar from '../components/appBar';
 import SongList from '../components/songList';
 import ListeningTrendsGraph from '../components/listeningTrendsGraph';
 import TopGenresGraph from '../components/topGenresGraph';
@@ -46,12 +47,40 @@ const sampleListeningData = [];
 function Dashboard() {
   return (
     <div>
-      <Typography ml={2} mt={2} variant="h1">
-        ReWrapped.
-      </Typography>
-      <Typography ml={3} mt={2} mb={5} variant="subtitle1">
-        Listen with your friends and discover new music
-      </Typography>
+      <ResponsiveAppBar />
+      <Grid
+        item
+        xs={12}
+        sm={6}
+        ml={10} 
+        mt={7}
+        display={"flex"}
+        justifyContent={"right"}
+        flexDirection={"column"}
+        alignItems={"right"}
+      >
+        <Typography
+          variant="h3"
+          style={{
+            fontWeight: "bold",
+            color: "#1DB954",
+            fontStyle: "italic",
+          }}
+        >
+          Spotify
+        </Typography>
+        <Typography
+          variant="h3"
+          style={{
+            fontWeight: "bold",
+            color: "#000000",
+            fontStyle: "italic",
+          }}
+        >
+          ReWrapped.
+        </Typography>
+      </Grid>
+      <Typography ml={10} mt={2} mb={5} variant="subtitle1" color='#61758A'>Listen with your friends and discover new music</Typography>
 
       <Container maxWidth="lg" style={{ padding: '24px' }}>
         <Grid >
