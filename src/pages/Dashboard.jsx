@@ -3,6 +3,7 @@ import { Grid, Typography, Container, Box } from "@mui/material";
 import SongList from '../components/songList';
 import ListeningTrendsGraph from '../components/listeningTrendsGraph';
 import TopGenresGraph from '../components/topGenresGraph';
+import StatsCard from '../components/statsCard';
 
 // todo: temp data until backend is done
 
@@ -52,12 +53,24 @@ function Dashboard() {
         Listen with your friends and discover new music
       </Typography>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', p: 0, m: 0 }}>
-        <ListeningTrendsGraph userData={sampleListeningData} />
-        <TopGenresGraph userData={sampleListeningData} />
-      </Box>
-
       <Container maxWidth="lg" style={{ padding: '24px' }}>
+        <Grid >
+          <Typography variant="h5" >
+            Listening Metrics
+          </Typography>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', pb: 12, height: '250px' }}>
+            <Box sx={{ mr: 1 }}>
+              <StatsCard title={"Listening Trends"} value={"+5%"} subtitle={"Last 6 Months +5%"} />
+              <ListeningTrendsGraph userData={sampleListeningData} />
+            </Box>
+            <Box sx={{ ml: 1 }}>
+              <StatsCard title={"Top Genres"} data={"4"} subtitle={"All Time 4"} />
+              <TopGenresGraph userData={sampleListeningData} />
+            </Box>
+          </Box>
+        </Grid>
+
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>

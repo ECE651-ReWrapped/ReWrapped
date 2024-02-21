@@ -22,6 +22,9 @@ function TopGenresGraph({ userData }) {
                 }
             }
         },
+        dataLabels: {
+            enabled: false
+        },
         xaxis: {
             categories: ['category A', 'category B', 'category C'],
         },
