@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Typography, Container } from "@mui/material";
+import { Grid, Typography, Container, Box } from "@mui/material";
 import SongList from '../components/songList';
 import ListeningTrendsGraph from '../components/listeningTrendsGraph';
 import TopGenresGraph from '../components/topGenresGraph';
@@ -48,16 +48,17 @@ function Dashboard() {
       <Typography ml={2} mt={2} variant="h1">
         ReWrapped.
       </Typography>
-      <Typography ml={3} mt={2} mb={5} variant="subtitle1">Listen with your friends and discover new music</Typography>
+      <Typography ml={3} mt={2} mb={5} variant="subtitle1">
+        Listen with your friends and discover new music
+      </Typography>
+
+      <Box sx={{ display: 'flex', justifyContent: 'center', p: 0, m: 0 }}>
+        <ListeningTrendsGraph userData={sampleListeningData} />
+        <TopGenresGraph userData={sampleListeningData} />
+      </Box>
 
       <Container maxWidth="lg" style={{ padding: '24px' }}>
-        <Grid container spacing={10}>
-          <Grid item xs={12}>
-            <ListeningTrendsGraph userData={sampleListeningData} />
-          </Grid>
-          <Grid item xs={12}>
-            <TopGenresGraph userData={sampleListeningData} />
-          </Grid>
+        <Grid container spacing={6}>
           <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>
             <SongList musicData={sampleSongData} />

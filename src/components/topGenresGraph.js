@@ -16,7 +16,10 @@ function TopGenresGraph({ userData }) {
                 borderRadius: 5,
                 borderRadiusApplication: 'end',
                 columnWidth: '50%',
-                
+                dataLabels: {
+                    position: 'top',
+                    hideOverflowingLabels: true,
+                }
             }
         },
         xaxis: {
@@ -33,7 +36,7 @@ function TopGenresGraph({ userData }) {
 
     const series = [{
         name: 'Top Genres',
-        data: [10, 18, 13]
+        data: [10, 18, 13],
     }];
 
     return (
