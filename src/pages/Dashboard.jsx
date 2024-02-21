@@ -1,7 +1,8 @@
 import React from 'react';
 import { Grid, Typography, Container } from "@mui/material";
 import SongList from '../components/songList';
-import ListeningTrends from '../components/listeningTrends';
+import ListeningTrendsGraph from '../components/listeningTrendsGraph';
+import TopGenresGraph from '../components/topGenresGraph';
 
 // todo: temp data until backend is done
 
@@ -52,7 +53,10 @@ function Dashboard() {
       <Container maxWidth="lg" style={{ padding: '24px' }}>
         <Grid container spacing={10}>
           <Grid item xs={12}>
-            <ListeningTrends userData={sampleListeningData} />
+            <ListeningTrendsGraph userData={sampleListeningData} />
+          </Grid>
+          <Grid item xs={12}>
+            <TopGenresGraph userData={sampleListeningData} />
           </Grid>
           <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>
