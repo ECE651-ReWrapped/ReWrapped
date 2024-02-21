@@ -84,7 +84,7 @@ function Dashboard() {
 
       <Container maxWidth="lg" style={{ padding: '24px' }}>
         <Grid >
-          <Typography variant="h5" >
+          <Typography variant="h5" textAlign={'center'}>
             Listening Metrics
           </Typography>
 
