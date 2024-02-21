@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Typography, Container } from "@mui/material";
 import SongList from '../components/songList';
+import ListeningTrends from '../components/listeningTrends';
 
 // todo: temp data until backend is done
 
@@ -38,6 +39,8 @@ const sampleSongData = [
 
 ]
 
+const sampleListeningData = [];
+
 function Dashboard() {
   return (
     <div>
@@ -46,16 +49,19 @@ function Dashboard() {
       </Typography>
       <Typography ml={3} mt={2} mb={5} variant="subtitle1">Listen with your friends and discover new music</Typography>
 
-      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <Grid container spacing={10} direction={'column'}>
-          <Grid item >
-              <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>
-              <SongList musicData={sampleSongData} />
+      <Container maxWidth="lg" style={{ padding: '24px' }}>
+        <Grid container spacing={10}>
+          <Grid item xs={12}>
+            <ListeningTrends userData={sampleListeningData} />
           </Grid>
-          <Grid item >
-              <Typography  padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Based on your groups listening history</Typography>
-              <SongList musicData={sampleSongData} />
-              </Grid>
+          <Grid item xs={12}>
+            <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>
+            <SongList musicData={sampleSongData} />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Based on your groups listening history</Typography>
+            <SongList musicData={sampleSongData} />
+          </Grid>
         </Grid>
       </Container>
       {/* <div className="row my-5">
