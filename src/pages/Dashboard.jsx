@@ -52,7 +52,7 @@ function Dashboard() {
         item
         xs={12}
         sm={6}
-        ml={10} 
+        ml={10}
         mt={7}
         display={"flex"}
         justifyContent={"right"}

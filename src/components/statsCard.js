@@ -18,7 +18,7 @@ function StatsCard({ title, value, subtitle }) {
             margin: '0 1rem 0 0',
             boxSizing: 'border-box',
             border: 'none',
-            boxShadow: false
+            boxShadow: 'none'
         }}>
             <Typography variant="subtitle1" style={{ fontWeight: 'bold'}}>
                 {title}
