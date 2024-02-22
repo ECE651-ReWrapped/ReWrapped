@@ -5,7 +5,6 @@ import Home from "./pages/Home";
 import { ErrorPage } from "./pages/ErrorPage";
 import Login from "./containers/Login";
 import Dashboard from "./pages/Dashboard";
-import "./App.css";
 
 const router = createBrowserRouter([
   {
