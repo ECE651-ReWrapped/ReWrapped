@@ -37,7 +37,8 @@
     "format": "prettier --write \"src/**/*.+(js|jsx|json|yml|yaml|css|md)\"",
     "lint": "eslint src",
     "lint:fix": "eslint --fix src",
-    "precommit": "lint-staged"
+    "precommit": "lint-staged",
+    "prepare": "husky"
   },
   "eslintConfig": {
     "extends": [
