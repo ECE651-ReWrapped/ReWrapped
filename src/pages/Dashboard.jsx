@@ -58,7 +58,9 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/recently-played/' + name);
+        const response = await fetch(
+          `${process.env.REACT_APP_API_LOCAL}/recently-played/${name}`
+          );
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -72,7 +74,9 @@ function Dashboard() {
   useEffect(() => {
     const fetchRcData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/recommended/' + name);
+        const response = await fetch(
+          `${process.env.REACT_APP_API_LOCAL}/recommended/${name}`
+          );
         const jsonData = await response.json();
         setRcData(jsonData);
       } catch (error) {
