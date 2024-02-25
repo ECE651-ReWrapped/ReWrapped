@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import { ErrorPage } from "./pages/ErrorPage";
 import Login from "./containers/Login";
 import Dashboard from "./pages/Dashboard";
+import ForgotPassword from "./pages/ForgotPassword";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: '/reset-password',
+    element: <ForgotPassword />
+  }
 ]);
 
 const App = () => {
