@@ -6,12 +6,14 @@ function SongList({ musicData }) {
     return (
         <Container maxWidth="sm" style={{ borderRadius: '10px', border: '2px solid #ccc'}}>
             <List>
-                {musicData.map((music, index) => (
+                {musicData.slice(0,10).map((music, index) => (
                     <SongCard
-                        name={music.name}
-                        artist={music.artist}
-                        album={music.album}
-                        albumArt={music.albumArt}
+                        name={music.track_name}
+                        artist={music.artists}
+                        album={""}
+                        albumArt={''}
+                        // album={music.album}
+                        // albumArt={music.albumArt}
                     />
                 ))}
             </List>

@@ -2,6 +2,8 @@ import React from 'react';
 import { Grid, Typography, Container, Box } from "@mui/material";
 import ResponsiveAppBar from '../components/appBar';
 import SongList from '../components/songList';
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import ListeningTrendsGraph from '../components/listeningTrendsGraph';
 import TopGenresGraph from '../components/topGenresGraph';
 import StatsCard from '../components/statsCard';
@@ -45,6 +47,45 @@ const sampleSongData = [
 const sampleListeningData = [];
 
 function Dashboard() {
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+
+  const name = queryParams.get('displayName');
+
+  const [rpData, setData] = useState(null);
+  const [rcData, setRcData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/recently-played/' + name);
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchRcData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/recommended/' + name);
+        const jsonData = await response.json();
+        setRcData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchRcData();
+  }, []);
+  if (rpData === null || rcData === null) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
       <ResponsiveAppBar />
@@ -103,11 +144,11 @@ function Dashboard() {
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>
-            <SongList musicData={sampleSongData} />
+            <SongList musicData={rpData} />
           </Grid>
           <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Based on your groups listening history</Typography>
-            <SongList musicData={sampleSongData} />
+            <SongList musicData={rcData} />
           </Grid>
         </Grid>
       </Container>
