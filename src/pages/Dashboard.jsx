@@ -1,9 +1,50 @@
 import React from 'react';
-import { Grid, Typography, Container } from "@mui/material";
+import { Grid, Typography, Container, Box } from "@mui/material";
 import ResponsiveAppBar from '../components/appBar';
 import SongList from '../components/songList';
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import ListeningTrendsGraph from '../components/listeningTrendsGraph';
+import TopGenresGraph from '../components/topGenresGraph';
+import StatsCard from '../components/statsCard';
+
+// todo: temp data until backend is done
+
+const sampleSongData = [
+  {
+    "name": "Cut To The Feeling",
+    "artist": "Carly Rae Jepsen",
+    "album": "Cut To The Feeling",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+  },
+  {
+    "name": "Cut To The Feeling",
+    "artist": "Carly Rae Jepsen",
+    "album": "Cut To The Feeling",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+  },
+  {
+    "name": "Cut To The Feeling",
+    "artist": "Carly Rae Jepsen",
+    "album": "Cut To The Feeling",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+  },
+  {
+    "name": "Cut To The Feeling",
+    "artist": "Carly Rae Jepsen",
+    "album": "Cut To The Feeling",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+  },
+  {
+    "name": "Cut To The Feeling",
+    "artist": "Carly Rae Jepsen",
+    "album": "Cut To The Feeling",
+    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+  }
+
+]
+
+const sampleListeningData = [];
 
 function Dashboard() {
   const location = useLocation();
@@ -17,7 +58,9 @@ function Dashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/recently-played/' + name);
+        const response = await fetch(
+          `${process.env.REACT_APP_API_LOCAL}/recently-played/${name}`
+          );
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -31,7 +74,9 @@ function Dashboard() {
   useEffect(() => {
     const fetchRcData = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/recommended/' + name);
+        const response = await fetch(
+          `${process.env.REACT_APP_API_LOCAL}/recommended/${name}`
+          );
         const jsonData = await response.json();
         setRcData(jsonData);
       } catch (error) {
@@ -82,13 +127,30 @@ function Dashboard() {
       </Grid>
       <Typography ml={10} mt={2} mb={5} variant="subtitle1" color='#61758A'>Listen with your friends and discover new music</Typography>
 
-      <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <Grid container spacing={10} direction={'column'}>
-          <Grid item >
+      <Container maxWidth="lg" style={{ padding: '24px' }}>
+        <Grid >
+          <Typography variant="h5" textAlign={'center'}>
+            Listening Metrics
+          </Typography>
+
+          <Box sx={{ display: 'flex', justifyContent: 'center', pb: 12, height: '250px' }}>
+            <Box sx={{ mr: 1 }}>
+              <StatsCard title={"Listening Trends"} value={"+5%"} subtitle={"Last 6 Months +5%"} />
+              <ListeningTrendsGraph userData={sampleListeningData} />
+            </Box>
+            <Box sx={{ ml: 1 }}>
+              <StatsCard title={"Top Genres"} data={"4"} subtitle={"All Time 4"} />
+              <TopGenresGraph userData={sampleListeningData} />
+            </Box>
+          </Box>
+        </Grid>
+
+        <Grid container spacing={6}>
+          <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>
             <SongList musicData={rpData} />
           </Grid>
-          <Grid item >
+          <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Based on your groups listening history</Typography>
             <SongList musicData={rcData} />
           </Grid>
