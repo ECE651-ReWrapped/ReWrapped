@@ -120,7 +120,7 @@ const Login = () => {
         </Button>
         <Grid container display={'flex'} justifyContent={'flex-end'}>
           <Grid item xs sx={{ mt: 2, mb: 2 }}>
-            <Link href="#" variant="body2">
+            <Link href="/reset-password" variant="body2">
               Forgot password?
             </Link>
           </Grid>
