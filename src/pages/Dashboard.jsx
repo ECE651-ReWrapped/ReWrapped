@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import React from 'react';
 import { Grid, Typography, Container, Box } from "@mui/material";
 import ResponsiveAppBar from '../components/appBar';
@@ -43,6 +44,14 @@ const sampleSongData = [
   }
 
 ]
+=======
+import React from "react";
+import { Grid, Typography, Container } from "@mui/material";
+import ResponsiveAppBar from "../components/appBar";
+import SongList from "../components/songList";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+>>>>>>> Stashed changes
 
 const sampleListeningData = [];
 
@@ -50,7 +59,11 @@ function Dashboard() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
+<<<<<<< Updated upstream
   const name = queryParams.get('displayName');
+=======
+  const name = queryParams.get("displayName");
+>>>>>>> Stashed changes
 
   const [rpData, setData] = useState(null);
   const [rcData, setRcData] = useState(null);
@@ -59,12 +72,21 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
+<<<<<<< Updated upstream
           `${process.env.REACT_APP_API_LOCAL}/recently-played/${name}`
           );
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
+=======
+          `${process.env.REACT_APP_API_LOCAL}/api/recently-played/${name}`
+        );
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+>>>>>>> Stashed changes
       }
     };
 
@@ -75,12 +97,21 @@ function Dashboard() {
     const fetchRcData = async () => {
       try {
         const response = await fetch(
+<<<<<<< Updated upstream
           `${process.env.REACT_APP_API_LOCAL}/recommended/${name}`
           );
         const jsonData = await response.json();
         setRcData(jsonData);
       } catch (error) {
         console.error('Error fetching data:', error);
+=======
+          `${process.env.REACT_APP_API_LOCAL}/api/recommended/${name}`
+        );
+        const jsonData = await response.json();
+        setRcData(jsonData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+>>>>>>> Stashed changes
       }
     };
 
@@ -125,8 +156,11 @@ function Dashboard() {
           ReWrapped.
         </Typography>
       </Grid>
-      <Typography ml={10} mt={2} mb={5} variant="subtitle1" color='#61758A'>Listen with your friends and discover new music</Typography>
+      <Typography ml={10} mt={2} mb={5} variant="subtitle1" color="#61758A">
+        Listen with your friends and discover new music
+      </Typography>
 
+<<<<<<< Updated upstream
       <Container maxWidth="lg" style={{ padding: '24px' }}>
         <Grid >
           <Typography variant="h5" textAlign={'center'}>
@@ -152,6 +186,36 @@ function Dashboard() {
           </Grid>
           <Grid item xs={12}>
             <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Based on your groups listening history</Typography>
+=======
+      <Container
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Grid container spacing={10} direction={"column"}>
+          <Grid item>
+            <Typography
+              padding="5px"
+              style={{ textAlign: "center" }}
+              variant="h5"
+              gutterBottom
+            >
+              Top Songs from your friends
+            </Typography>
+            <SongList musicData={rpData} />
+          </Grid>
+          <Grid item>
+            <Typography
+              padding="5px"
+              style={{ textAlign: "center" }}
+              variant="h5"
+              gutterBottom
+            >
+              Based on your groups listening history
+            </Typography>
+>>>>>>> Stashed changes
             <SongList musicData={rcData} />
           </Grid>
         </Grid>
@@ -165,8 +229,6 @@ function Dashboard() {
         </ul>
       </div> */}
     </div>
-
-
   );
 }
 
