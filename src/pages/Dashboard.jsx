@@ -1,57 +1,52 @@
-<<<<<<< Updated upstream
-import React from 'react';
+import React from "react";
 import { Grid, Typography, Container, Box } from "@mui/material";
-import ResponsiveAppBar from '../components/appBar';
-import SongList from '../components/songList';
-import { useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-import ListeningTrendsGraph from '../components/listeningTrendsGraph';
-import TopGenresGraph from '../components/topGenresGraph';
-import StatsCard from '../components/statsCard';
+import ResponsiveAppBar from "../components/appBar";
+import SongList from "../components/songList";
+import { useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import ListeningTrendsGraph from "../components/listeningTrendsGraph";
+import TopGenresGraph from "../components/topGenresGraph";
+import StatsCard from "../components/statsCard";
 
 // todo: temp data until backend is done
 
 const sampleSongData = [
   {
-    "name": "Cut To The Feeling",
-    "artist": "Carly Rae Jepsen",
-    "album": "Cut To The Feeling",
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+    name: "Cut To The Feeling",
+    artist: "Carly Rae Jepsen",
+    album: "Cut To The Feeling",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
   },
   {
-    "name": "Cut To The Feeling",
-    "artist": "Carly Rae Jepsen",
-    "album": "Cut To The Feeling",
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+    name: "Cut To The Feeling",
+    artist: "Carly Rae Jepsen",
+    album: "Cut To The Feeling",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
   },
   {
-    "name": "Cut To The Feeling",
-    "artist": "Carly Rae Jepsen",
-    "album": "Cut To The Feeling",
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+    name: "Cut To The Feeling",
+    artist: "Carly Rae Jepsen",
+    album: "Cut To The Feeling",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
   },
   {
-    "name": "Cut To The Feeling",
-    "artist": "Carly Rae Jepsen",
-    "album": "Cut To The Feeling",
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
+    name: "Cut To The Feeling",
+    artist: "Carly Rae Jepsen",
+    album: "Cut To The Feeling",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
   },
   {
-    "name": "Cut To The Feeling",
-    "artist": "Carly Rae Jepsen",
-    "album": "Cut To The Feeling",
-    "albumArt": "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1"
-  }
-
-]
-=======
-import React from "react";
-import { Grid, Typography, Container } from "@mui/material";
-import ResponsiveAppBar from "../components/appBar";
-import SongList from "../components/songList";
-import { useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
->>>>>>> Stashed changes
+    name: "Cut To The Feeling",
+    artist: "Carly Rae Jepsen",
+    album: "Cut To The Feeling",
+    albumArt:
+      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+  },
+];
 
 const sampleListeningData = [];
 
@@ -59,11 +54,7 @@ function Dashboard() {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
 
-<<<<<<< Updated upstream
-  const name = queryParams.get('displayName');
-=======
   const name = queryParams.get("displayName");
->>>>>>> Stashed changes
 
   const [rpData, setData] = useState(null);
   const [rcData, setRcData] = useState(null);
@@ -72,21 +63,12 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-<<<<<<< Updated upstream
           `${process.env.REACT_APP_API_LOCAL}/recently-played/${name}`
-          );
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-=======
-          `${process.env.REACT_APP_API_LOCAL}/api/recently-played/${name}`
         );
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
         console.error("Error fetching data:", error);
->>>>>>> Stashed changes
       }
     };
 
@@ -97,21 +79,12 @@ function Dashboard() {
     const fetchRcData = async () => {
       try {
         const response = await fetch(
-<<<<<<< Updated upstream
           `${process.env.REACT_APP_API_LOCAL}/recommended/${name}`
-          );
-        const jsonData = await response.json();
-        setRcData(jsonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-=======
-          `${process.env.REACT_APP_API_LOCAL}/api/recommended/${name}`
         );
         const jsonData = await response.json();
         setRcData(jsonData);
       } catch (error) {
         console.error("Error fetching data:", error);
->>>>>>> Stashed changes
       }
     };
 
@@ -160,20 +133,34 @@ function Dashboard() {
         Listen with your friends and discover new music
       </Typography>
 
-<<<<<<< Updated upstream
-      <Container maxWidth="lg" style={{ padding: '24px' }}>
-        <Grid >
-          <Typography variant="h5" textAlign={'center'}>
+      <Container maxWidth="lg" style={{ padding: "24px" }}>
+        <Grid>
+          <Typography variant="h5" textAlign={"center"}>
             Listening Metrics
           </Typography>
 
-          <Box sx={{ display: 'flex', justifyContent: 'center', pb: 12, height: '250px' }}>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              pb: 12,
+              height: "250px",
+            }}
+          >
             <Box sx={{ mr: 1 }}>
-              <StatsCard title={"Listening Trends"} value={"+5%"} subtitle={"Last 6 Months +5%"} />
+              <StatsCard
+                title={"Listening Trends"}
+                value={"+5%"}
+                subtitle={"Last 6 Months +5%"}
+              />
               <ListeningTrendsGraph userData={sampleListeningData} />
             </Box>
             <Box sx={{ ml: 1 }}>
-              <StatsCard title={"Top Genres"} data={"4"} subtitle={"All Time 4"} />
+              <StatsCard
+                title={"Top Genres"}
+                data={"4"}
+                subtitle={"All Time 4"}
+              />
               <TopGenresGraph userData={sampleListeningData} />
             </Box>
           </Box>
@@ -181,21 +168,6 @@ function Dashboard() {
 
         <Grid container spacing={6}>
           <Grid item xs={12}>
-            <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Top Songs from your friends</Typography>
-            <SongList musicData={rpData} />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography padding='5px' style={{ textAlign: 'center' }} variant="h5" gutterBottom>Based on your groups listening history</Typography>
-=======
-      <Container
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Grid container spacing={10} direction={"column"}>
-          <Grid item>
             <Typography
               padding="5px"
               style={{ textAlign: "center" }}
@@ -206,7 +178,7 @@ function Dashboard() {
             </Typography>
             <SongList musicData={rpData} />
           </Grid>
-          <Grid item>
+          <Grid item xs={12}>
             <Typography
               padding="5px"
               style={{ textAlign: "center" }}
@@ -215,7 +187,6 @@ function Dashboard() {
             >
               Based on your groups listening history
             </Typography>
->>>>>>> Stashed changes
             <SongList musicData={rcData} />
           </Grid>
         </Grid>
