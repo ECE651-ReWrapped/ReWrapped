@@ -56,43 +56,43 @@ function Dashboard() {
 
   const name = queryParams.get("displayName");
 
-  const [rpData, setData] = useState(null);
-  const [rcData, setRcData] = useState(null);
+  const [rpData, setData] = useState([sampleSongData]);
+  const [rcData, setRcData] = useState([sampleSongData]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_LOCAL}/recently-played/${name}`
-        );
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.REACT_APP_API_LOCAL}/recently-played/${name}`
+  //       );
+  //       const jsonData = await response.json();
+  //       setData(jsonData);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
-  useEffect(() => {
-    const fetchRcData = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_API_LOCAL}/recommended/${name}`
-        );
-        const jsonData = await response.json();
-        setRcData(jsonData);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchRcData = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${process.env.REACT_APP_API_LOCAL}/recommended/${name}`
+  //       );
+  //       const jsonData = await response.json();
+  //       setRcData(jsonData);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
 
-    fetchRcData();
-  }, []);
-  if (rpData === null || rcData === null) {
-    return <p>Loading...</p>;
-  }
+  //   fetchRcData();
+  // }, []);
+  // if (rpData === null || rcData === null) {
+  //   return <p>Loading...</p>;
+  // }
 
   return (
     <div>
