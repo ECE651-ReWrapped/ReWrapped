@@ -8,7 +8,7 @@ import InvalidLink from '../components/InvalidLink';
 
 const SetNewPassword = () => {
     const [password, setPassword] = useState('');
-    const [tokenValid, setTokenValid] = useState(false);
+    const [tokenValid, setTokenValid] = useState(undefined);
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
     const { token } = useParams();
@@ -21,6 +21,7 @@ const SetNewPassword = () => {
                     setTokenValid(true);
                 } else {
                     console.error(`Unexpected response status: ${res.status}`);
+                    setTokenValid(false);
                 }
             } catch (err) {
                 console.error('Error during token validation:', err.message);
@@ -160,7 +161,8 @@ const SetNewPassword = () => {
                     Reset Password
                 </Button>
         </Box>}
-        {!tokenValid && <InvalidLink />}
+        {tokenValid === undefined && <p>Loading...</p>}
+        {tokenValid === false && <InvalidLink />}
         </>
     );
 };
