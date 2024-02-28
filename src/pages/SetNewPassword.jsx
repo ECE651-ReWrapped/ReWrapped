@@ -4,6 +4,7 @@ import { Box, Typography, Avatar, TextField, Button } from '@mui/material';
 import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import InvalidLink from '../containers/InvalidLink';
 
 const SetNewPassword = () => {
     const [password, setPassword] = useState('');
@@ -160,7 +161,7 @@ const SetNewPassword = () => {
                     Reset Password
                 </Button>
         </Box>}
-        {!tokenValid && <p>Not a valid link!</p>}
+        {!tokenValid && <InvalidLink />}
         </>
     );
 };
