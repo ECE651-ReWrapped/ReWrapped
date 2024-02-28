@@ -8,7 +8,7 @@ import InvalidLink from '../components/InvalidLink';
 
 const SetNewPassword = () => {
     const [password, setPassword] = useState('');
-    const [tokenValid, setTokenValid] = useState(undefined);
+    const [tokenValid, setTokenValid] = useState(undefined); // undefined - invalid token, false - unknown error code
     const [confirmPassword, setConfirmPassword] = useState('');
     const navigate = useNavigate();
     const { token } = useParams();
@@ -19,12 +19,15 @@ const SetNewPassword = () => {
                 const res = await axios.get(`${process.env.REACT_APP_API_LOCAL}/reset-password/${token}`);
                 if (res.status === 200) {
                     setTokenValid(true);
+                } else if (res.status === 405) {
+                    setTokenValid(undefined);
                 } else {
                     console.error(`Unexpected response status: ${res.status}`);
                     setTokenValid(false);
                 }
             } catch (err) {
                 console.error('Error during token validation:', err.message);
+                setTokenValid(false);
             }
         };
         validateToken();
