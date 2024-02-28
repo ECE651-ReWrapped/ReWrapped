@@ -3,7 +3,7 @@ import { Box, Typography, TextField, Button, Avatar } from '@mui/material';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import { Link } from 'react-router-dom';
 import axios from "axios";
-import EmailSent from './EmailSent';
+import EmailSent from '../containers/EmailSent';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
