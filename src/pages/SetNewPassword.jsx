@@ -1,10 +1,66 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { Box, Typography, Avatar, TextField, Button } from '@mui/material';
 import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SetNewPassword = () => {
+    const [password, setPassword] = useState('');
+    const [tokenValid, setTokenValid] = useState(false);
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const navigate = useNavigate();
+    const { token } = useParams();
+
+    useEffect(() => {
+        const validateToken = async () => {
+            try {
+                const res = await axios.get(`${process.env.REACT_APP_API_LOCAL}/reset-password/:token`);
+                if (res.status === 200) {
+                    setTokenValid(true);
+                } else {
+                    console.error(`Unexpected response status: ${res.status}`);
+                }
+            } catch (err) {
+                console.error('Error during token validation:', err.message);
+            }
+        };
+        validateToken();
+    }, []); 
+
+
+    const handleResetPasswordUpdate = async () => {
+        // send request to backend to update password
+        try {
+            const res = await axios.put(
+            `${process.env.REACT_APP_API_LOCAL}/reset-password`,
+            {
+                urlToken : token, 
+                password : password,
+                confirmPassword : confirmPassword
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                withCredentials: true,
+            });
+
+            console.log(res);
+            if (res.status === 200) {
+                navigate('/');
+            } else {
+                
+            }
+        } catch (err) {
+            console.error(err);
+            navigate('/reset-password');
+        }
+    };
+
     return (
-        <Box
+        <>
+        {tokenValid && <Box
             sx={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -40,6 +96,8 @@ const SetNewPassword = () => {
                     margin="normal"
                     id="password"
                     name="password"
+                    value={password}
+                    onChange={e => {setPassword(e.target.value)}}
                     sx={{
                         width: '100%', 
                         mb: 2,
@@ -59,6 +117,8 @@ const SetNewPassword = () => {
                     margin="normal"
                     id="confirm password"
                     name="confirm password"
+                    value={confirmPassword}
+                    onChange={e => {setConfirmPassword(e.target.value)}}
                     sx={{
                         width: '100%', 
                         mb: 2,
@@ -76,6 +136,7 @@ const SetNewPassword = () => {
                     variant="contained"
                     color="primary"
                     size="large"
+                    onClick={handleResetPasswordUpdate}
                     sx={{
                         mt: 2,
                         borderRadius: 2,
@@ -98,7 +159,9 @@ const SetNewPassword = () => {
                     >
                     Reset Password
                 </Button>
-        </Box>
+        </Box>}
+        {!tokenValid && <p>Not a valid link!</p>}
+        </>
     );
 };
 
