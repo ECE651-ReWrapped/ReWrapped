@@ -16,7 +16,7 @@ const SetNewPassword = () => {
     useEffect(() => {
         const validateToken = async () => {
             try {
-                const res = await axios.get(`${process.env.REACT_APP_API_LOCAL}/reset-password/:token`);
+                const res = await axios.get(`${process.env.REACT_APP_API_LOCAL}/reset-password/${token}`);
                 if (res.status === 200) {
                     setTokenValid(true);
                 } else {
@@ -28,7 +28,7 @@ const SetNewPassword = () => {
             }
         };
         validateToken();
-    }, []); 
+    }, [token]); 
 
 
     const handleResetPasswordUpdate = async () => {
