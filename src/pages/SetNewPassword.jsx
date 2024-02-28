@@ -4,7 +4,7 @@ import { Box, Typography, Avatar, TextField, Button } from '@mui/material';
 import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import InvalidLink from '../containers/InvalidLink';
+import InvalidLink from '../components/InvalidLink';
 
 const SetNewPassword = () => {
     const [password, setPassword] = useState('');
@@ -47,7 +47,6 @@ const SetNewPassword = () => {
                 withCredentials: true,
             });
 
-            console.log(res);
             if (res.status === 200) {
                 navigate('/');
             } else {
