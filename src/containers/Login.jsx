@@ -68,12 +68,12 @@ const Login = () => {
         justifyContent="center"
         alignItems="center"
       >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LoginIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
-          </Typography>
+        <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <LoginIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Sign in
+        </Typography>
       </Grid>
       <Box component="form" onSubmit={formik.handleSubmit}>
         <TextField
@@ -118,13 +118,19 @@ const Login = () => {
         >
           Login
         </Button>
-        <Grid container display={'flex'} justifyContent={'flex-end'}>
+        <Grid container display={"flex"} justifyContent={"flex-end"}>
           <Grid item xs sx={{ mt: 2, mb: 2 }}>
             <Link href="/reset-password" variant="body2">
               Forgot password?
             </Link>
           </Grid>
-          <Grid item xs sx={{ mt: 2, mb: 2 }} display={'flex'} justifyContent={"flex-end"}>
+          <Grid
+            item
+            xs
+            sx={{ mt: 2, mb: 2 }}
+            display={"flex"}
+            justifyContent={"flex-end"}
+          >
             <Link href="/signup" variant="body2">
               Don't have an account?
             </Link>
