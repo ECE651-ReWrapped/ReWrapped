@@ -7,6 +7,7 @@ import Login from "./containers/Login";
 import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
 import Profile from "./pages/Profile";
+import SetNewPassword from "./pages/SetNewPassword";
 
 const router = createBrowserRouter([
   {
@@ -33,8 +34,12 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/reset-password",
-    element: <ForgotPassword />,
+    path: '/reset-password/:token',
+    element: <SetNewPassword />
+  },
+  {
+    path: '/reset-password',
+    element: <ForgotPassword />
   },
   {
     path: "/profile",

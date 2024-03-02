@@ -1,21 +1,50 @@
 import React, { useState } from 'react';
-import { Box, Typography, TextField, Button, Avatar, useMediaQuery } from '@mui/material';
+import { Box, Typography, TextField, Button, Avatar } from '@mui/material';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import { Link } from 'react-router-dom';
+import axios from "axios";
+import EmailSent from '../components/EmailSent';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
+  const [emailExists, setEmailExists] = useState(false);
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const handleSendRequest = () => {
+  const handleSendRequest = async () => {
     console.log(`Sending password reset request for email: ${email}`);
+    // check if email exists in db
+    try {
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_LOCAL}/reset-password`,
+        {
+          email : email 
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      console.log(res);
+
+      if (res.status === 200) { // user exists
+        setEmailExists(true);
+      } else {
+        // user does not exist
+        setEmailExists(false);
+      }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
-    <Box
+    <>
+    {!emailExists && <Box
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -110,7 +139,9 @@ const ForgotPassword = () => {
           &lt; Return to Sign In
         </Typography>
       </Link>
-    </Box>
+    </Box>}
+    {emailExists && <EmailSent />}
+    </>
   );
 };
 
