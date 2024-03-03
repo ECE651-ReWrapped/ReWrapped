@@ -6,7 +6,7 @@ import { ErrorPage } from "./pages/ErrorPage";
 import Login from "./containers/Login";
 import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
-import Profile from "./pages/Profile";
+import UserProfile from "./pages/Profile";
 import SetNewPassword from "./pages/SetNewPassword";
 
 const router = createBrowserRouter([
@@ -43,7 +43,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <Profile />,
+    element: <UserProfile />,
   },
 ]);
 
