@@ -15,7 +15,7 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const pages = [];
+const pages = ["Create Playlist"];
 const settings = ["Profile", "Logout"];
 
 const logout = async () => {
