@@ -3,9 +3,9 @@ import { Avatar, Typography, Grid } from "@mui/material";
 import '@fontsource/inter';
 
 const sampleData = {
-  display_name: 'Prerona Ghosh',
+  display_name: 'User Full Name',
   country: 'Canada',
-  email: 'p2ghosh@uwaterloo.ca',
+  email: 'email@email.com',
   images: [
     {
       url: "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=841872282494341&height=50&width=50&ext=1712000571&hash=AfpxAC3kYkaGuxyr-VWyvlV2FtfdgD6o1kZtGz5cHaV4sA"

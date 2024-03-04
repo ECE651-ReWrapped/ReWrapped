@@ -2,42 +2,42 @@ import React from "react";
 import { makeStyles } from '@mui/styles';
 import { Grid, ListItem, ListItemText, ListItemAvatar, Avatar, Typography } from '@mui/material';
 
-const topTracksList = [
+const listOfPlaylists = [
   {
-    trackName: "Some Song",
-    popularity: 59,
-    trackSinger: "Singer",
-    trackImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
+    playlistName: "Some playlist",
+    totalTracks: 20,
+    playlistOwner: "Some Owner",
+    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
   },
   {
-    trackName: "Some Song",
-    popularity: 59,
-    trackSinger: "Singer",
-    trackImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
+    playlistName: "Some playlist",
+    totalTracks: 20,
+    playlistOwner: "Some Owner",
+    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
   },
   {
-    trackName: "Some Song",
-    popularity: 59,
-    trackSinger: "Singer",
-    trackImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
+    playlistName: "Some playlist",
+    totalTracks: 20,
+    playlistOwner: "Some Owner",
+    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
   },
   {
-    trackName: "Some Song",
-    popularity: 59,
-    trackSinger: "Singer",
-    trackImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
+    playlistName: "Some playlist",
+    totalTracks: 20,
+    playlistOwner: "Some Owner",
+    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
   },
   {
-    trackName: "Some Song",
-    popularity: 59,
-    trackSinger: "Singer",
-    trackImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
+    playlistName: "Some playlist",
+    totalTracks: 20,
+    playlistOwner: "Some Owner",
+    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
   },
   {
-    trackName: "Some Song",
-    popularity: 59,
-    trackSinger: "Singer",
-    trackImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
+    playlistName: "Some playlist",
+    totalTracks: 20,
+    playlistOwner: "Some Owner",
+    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
   }
 ];
 
@@ -108,22 +108,22 @@ const useStyles = makeStyles(() => ({
 
 
 
-const TopTracks = () => {
+const UserPlaylists = () => {
   const classes = useStyles();
 
   return (
     <Grid container spacing={2} >
-      {topTracksList.map((artist, index) => (
+      {listOfPlaylists.map((artist, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
             <ListItemAvatar sx={{padding: 1}}>
-              <Avatar alt={artist.trackName} src={artist.trackImage} className={classes.avatar} />
+              <Avatar alt={artist.playlistName} src={artist.playlistImage} className={classes.avatar} />
             </ListItemAvatar>
             <Grid item className={classes.textContainer}>
               <ListItemText
                 primary={
                   <Typography variant="h6" className={classes.primaryText}>
-                    {artist.trackName}
+                    {artist.playlistName}
                   </Typography>
                 }
                 secondary={
@@ -133,7 +133,7 @@ const TopTracks = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      {artist.trackSinger}
+                      {artist.playlistOwner}
                     </Typography>
                     <br/>
                     <Typography
@@ -141,7 +141,7 @@ const TopTracks = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      Popularity: {artist.popularity}
+                      Popularity: {artist.totalTracks}
                     </Typography>
                   </>
                 }
@@ -154,4 +154,4 @@ const TopTracks = () => {
   );
 };
 
-export default TopTracks;
+export default UserPlaylists;

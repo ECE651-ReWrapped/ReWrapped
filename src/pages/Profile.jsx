@@ -4,6 +4,7 @@ import FollowingArtists from "../components/FollowingArtists";
 import TopTracks from "../components/TopTracks";
 import ProfileBar from "../components/ProfileBar";
 import SavedShows from "../components/SavedShows";
+import UserPlaylists from "../components/UserPlaylists";
 import '@fontsource/inter';
 
 const UserProfile = () => {
@@ -12,18 +13,17 @@ const UserProfile = () => {
   }, []);
 
   return (
-    <>
+    <Grid>
       <Grid>
         <ProfileBar />
       </Grid>
-      <Grid>
-        <Typography variant="h5" gutterBottom style={{ 
-          marginTop: 25,
+      <Grid container display="flex" direction="column" justifyContent="center" alignItems="center">
+        <Typography variant="h5" gutterBottom style={{
+          marginTop: 25, 
           fontWeight: 'bold',
           fontSize: '28px', 
           fontFamily: 'Inter, sans-serif',  
           color: '#333', 
-          marginBottom: '20px', 
           textAlign: 'center',
           padding: '15px'
         }}>
@@ -32,14 +32,13 @@ const UserProfile = () => {
         <FollowingArtists />
       </Grid>
 
-      <Grid>
+      <Grid container display="flex" direction="column" justifyContent="center" alignItems="center">
         <Typography variant="h5" gutterBottom style={{ 
-          marginTop: 50,
+          marginTop: 50, 
           fontWeight: 'bold',
           fontSize: '28px', 
           fontFamily: 'Inter, sans-serif',  
           color: '#333', 
-          marginBottom: '20px', 
           textAlign: 'center',
           padding: '15px'
         }}>
@@ -48,14 +47,13 @@ const UserProfile = () => {
         <TopTracks />
       </Grid>
 
-      <Grid>
+      <Grid container display="flex" direction="column" justifyContent="center" alignItems="center">
         <Typography variant="h5" gutterBottom style={{ 
-          marginTop: 50,
+          marginTop: 50, 
           fontWeight: 'bold',
           fontSize: '28px', 
           fontFamily: 'Inter, sans-serif',  
-          color: '#333', 
-          marginBottom: '20px', 
+          color: '#333',
           textAlign: 'center',
           padding: '15px'
         }}>
@@ -63,7 +61,22 @@ const UserProfile = () => {
         </Typography>
         <SavedShows />
       </Grid>
-    </>
+
+      <Grid container sx={{marginBottom: 15}} display="flex" direction="column" justifyContent="center" alignItems="center">
+        <Typography variant="h5" gutterBottom style={{ 
+          marginTop: 50, 
+          fontWeight: 'bold',
+          fontSize: '28px', 
+          fontFamily: 'Inter, sans-serif',  
+          color: '#333', 
+          textAlign: 'center',
+          padding: '15px',
+        }}>
+          Your saved playlists
+        </Typography>
+        <UserPlaylists />
+      </Grid>
+    </Grid>
   );
 };
 

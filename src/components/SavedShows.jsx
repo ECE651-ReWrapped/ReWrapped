@@ -43,7 +43,7 @@ const savedShowsList = [
 
 const useStyles = makeStyles(() => ({
   listItem: {
-    backgroundColor: '#F7EABA',  
+    backgroundColor: '#D7EBD5',  
     borderRadius: 16,
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     transition: 'transform 0.3s ease-in-out',
@@ -112,7 +112,7 @@ const SavedShows = () => {
   const classes = useStyles();
 
   return (
-    <Grid container spacing={2} marginBottom={40}>
+    <Grid container spacing={2}>
       {savedShowsList.map((artist, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
