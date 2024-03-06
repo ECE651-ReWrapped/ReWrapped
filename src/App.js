@@ -8,6 +8,7 @@ import Dashboard from "./pages/Dashboard";
 import ForgotPassword from "./pages/ForgotPassword";
 import UserProfile from "./pages/Profile";
 import SetNewPassword from "./pages/SetNewPassword";
+import CreatePlaylist from "./pages/CreatePlaylist";
 
 const router = createBrowserRouter([
   {
@@ -34,16 +35,28 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: '/reset-password/:token',
-    element: <SetNewPassword />
+    path: "/reset-password/:token",
+    element: <SetNewPassword />,
   },
   {
-    path: '/reset-password',
-    element: <ForgotPassword />
+    path: "/reset-password",
+    element: <ForgotPassword />,
   },
   {
     path: "/profile",
-    element: <UserProfile />,
+    element: (
+      <ProtectedRoute>
+        <UserProfile />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/createPlaylist",
+    element: (
+      <ProtectedRoute>
+        <CreatePlaylist />
+      </ProtectedRoute>
+    ),
   },
 ]);
 
