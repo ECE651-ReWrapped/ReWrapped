@@ -7,8 +7,10 @@ import axios from "axios";
 const Searchbar = () => {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const debouncedSearch = debounce(async (query) => {
+    setIsLoading(true);
     console.log("Submitted");
     try {
       const res = await axios.post(
@@ -19,9 +21,11 @@ const Searchbar = () => {
         { withCredentials: true }
       );
 
-      console.log(res);
+      setResults(res.data);
+      setIsLoading(false);
     } catch (err) {
       console.error("Search Error", err);
+      setIsLoading(false);
     }
   }, 500);
 
@@ -29,6 +33,8 @@ const Searchbar = () => {
   useEffect(() => {
     if (query.length >= 3) {
       debouncedSearch(query);
+    } else {
+      setResults([]); //Empty results if query length less than 3
     }
   }, [query]);
 
@@ -47,6 +53,13 @@ const Searchbar = () => {
           <SearchIcon />
         </IconButton>
       </form>
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        results.map((user, index) => (
+          <div key={index}>{user.user_name}</div> // Make sure your key is unique
+        ))
+      )}
     </>
   );
 };
