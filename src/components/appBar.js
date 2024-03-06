@@ -34,6 +34,7 @@ const logout = async () => {
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
+  
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
