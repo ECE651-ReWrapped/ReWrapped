@@ -4,7 +4,7 @@ import axios from "axios";
 import { useStyles } from "../styles/profilePageData";
 
 // temp data
-const accessToken = "BQCbal1N8OpX_U10GjpXc-p0YKSkEyQFwK1VpGccfVgfDm7Sl9lYXd48UaWelLT64Zz66Zyku3QwkYs0IEL3oolg9iZL5u_hbLYvbuA8LCAXoIYeE8mCNzvbrTKUwgXyvTrozEOuLfMPGqZaDTBSaFBaVhGCHo0AVX9B7w2DZ-3BAvkRYhtom0X4rK3jDB7rUyDQHo9F6Y6hEA5mjI1v-zTV3kr4KDGfPOESRg";
+const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN;
 
 const TopTracks = () => {
   const classes = useStyles();
