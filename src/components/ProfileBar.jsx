@@ -1,22 +1,34 @@
-import React from "react";
 import { Avatar, Typography, Grid } from "@mui/material";
 import '@fontsource/inter';
+import { useEffect, useState } from "react";
+import axios from "axios";
 
-const sampleData = {
-  display_name: 'User Full Name',
-  country: 'Canada',
-  email: 'email@email.com',
-  images: [
-    {
-      url: "https://platform-lookaside.fbsbx.com/platform/profilepic/?asid=841872282494341&height=50&width=50&ext=1712000571&hash=AfpxAC3kYkaGuxyr-VWyvlV2FtfdgD6o1kZtGz5cHaV4sA"
-    }
-  ],
-  followers: '19',
-  user_id: '1234566',
-  subscription_type: 'Free'
-};
+// temp data
+const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN;
 
 const ProfileBar = () => {
+    const [spotifyUserData, setSpotifyUserData] = useState();
+    
+    useEffect(() => {
+        const getApiData = async () => {
+            try {
+                const res = await axios.get("https://api.spotify.com/v1/me", {
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+                setSpotifyUserData(res.data);
+            } catch (err) {
+                console.error("Error fetching data: ", err);
+            }
+        };
+        getApiData();
+    }, []);
+
+    if (!spotifyUserData) {
+        return null;
+    }
+
     return (
         <Grid 
             container 
@@ -27,7 +39,7 @@ const ProfileBar = () => {
             sx={{backgroundColor: '#EFEFEF'}}
         >
             <Avatar
-            src={sampleData.images[0].url}
+            src={spotifyUserData.images[1].url}
             alt="Profile Photo not available"
             sx={{ width: '200px', height: '200px', borderRadius: '50%', 
             '@media (min-width: 600px)' : {
@@ -48,7 +60,7 @@ const ProfileBar = () => {
                 } 
             }}
             >
-                {sampleData.display_name}
+                {spotifyUserData.display_name}
             </Typography>
             <Typography sx={{color: 'grey', fontSize: '15px', 
             '@media (min-width: 600px)' : {
@@ -59,7 +71,7 @@ const ProfileBar = () => {
                 } 
             }}
             >
-                {sampleData.email}
+                {spotifyUserData.email}
             </Typography>
             <Typography sx={{ color: 'grey', fontSize: '15px',
                 '@media (min-width: 600px)' : {
@@ -69,7 +81,7 @@ const ProfileBar = () => {
                     fontSize: '20px'
                 } 
             }}>
-                {sampleData.country}
+                {spotifyUserData.country}
             </Typography>
             <Grid 
             container
@@ -88,17 +100,17 @@ const ProfileBar = () => {
                 justifyContent="center"
                 alignItems="center">
                     <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: 'grey',
-                    '@media (min-width: 600px)' : {
-                        fontSize: '16px'
-                    },
-                    '@media (min-width: 960px)' : {
-                        fontSize: '18px'
-                    },
-                }}>
+                        '@media (min-width: 600px)' : {
+                            fontSize: '16px'
+                        },
+                        '@media (min-width: 960px)' : {
+                            fontSize: '18px'
+                        },
+                    }}>
                         Followers
                     </Typography>
                     <Typography sx={{color: 'grey'}}>
-                        {sampleData.followers}
+                        {spotifyUserData.followers.total}
                     </Typography>
                 </Grid>
                 <Grid item 
@@ -120,7 +132,7 @@ const ProfileBar = () => {
                         Subscription
                     </Typography>
                     <Typography sx={{color: 'grey'}}>
-                        {sampleData.subscription_type}
+                        {spotifyUserData.product}
                     </Typography>
                 </Grid>
                 <Grid item 
@@ -143,7 +155,7 @@ const ProfileBar = () => {
                         Spotify ID
                     </Typography>
                     <Typography sx={{color: 'grey'}}>
-                        {sampleData.user_id}
+                        {spotifyUserData.id.substring(0, 11)}
                     </Typography>
                 </Grid>
             </Grid>

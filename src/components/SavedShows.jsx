@@ -1,129 +1,49 @@
-import React from "react";
-import { makeStyles } from '@mui/styles';
+import { useState, useEffect } from "react";
 import { Grid, ListItem, ListItemText, ListItemAvatar, Avatar, Typography } from '@mui/material';
+import axios from "axios";
+import { useStyles } from "../styles/profilePageData";
 
-const savedShowsList = [
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  }
-];
-
-const useStyles = makeStyles(() => ({
-  listItem: {
-    backgroundColor: '#D7EBD5',  
-    borderRadius: 16,
-    boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
-    transition: 'transform 0.3s ease-in-out',
-    '&:hover': {
-      transform: 'scale(1.05)',
-    },
-    '@media (min-width: 320px) and (max-width: 500px)': {
-      padding: 2, 
-      marginLeft: '5%'
-    },
-    '@media (min-width: 501px)': {
-      padding: 2, 
-      marginLeft: '25%'
-    },
-  },
-  avatar: {
-    marginLeft: 5,
-    width: 70, 
-    height: 70, 
-    '@media (min-width: 600px)': {
-      width: 60, 
-      height: 60, 
-    },
-    '@media (min-width: 960px)': {
-      width: 70, 
-      height: 70, 
-    },
-  },
-  textContainer: {
-    marginLeft: 10, 
-    '@media (min-width: 600px)': {
-      marginLeft: 14, 
-    },
-    '@media (min-width: 960px)': {
-      marginLeft: 20, 
-    },
-  },
-  primaryText: {
-    fontWeight: 'bold',
-    color: 'black',  
-    fontFamily: 'Spotify, Arial, sans-serif',  
-    fontSize: 15, 
-    '@media (min-width: 600px)': {
-      fontSize: 16, 
-    },
-    '@media (min-width: 960px)': {
-      fontSize: 18, 
-    },
-  },
-  secondaryText: {
-    color: 'black',  
-    fontFamily: 'Spotify, Roboto, sans-serif',  
-    fontSize: 12, 
-    '@media (min-width: 600px)': {
-      fontSize: 13, 
-    },
-    '@media (min-width: 960px)': {
-      fontSize: 13, 
-    },
-  },
-}));
-
-
+// temp data
+const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN;
 
 const SavedShows = () => {
   const classes = useStyles();
+  const [savedShowsList, setSavedShowsList] = useState([]);
+
+  useEffect(() => {
+    const getApiData = async () => {
+      try {
+        const res = await axios.get("https://api.spotify.com/v1/me/shows", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, 
+          },
+          params: {
+            limit: 6,
+            offset: 0,
+          },
+        });
+        setSavedShowsList(res.data.items);
+
+      } catch (err) {
+          console.error("Error fetching saved shows:", err);
+      }
+    };
+    getApiData();
+  }, []);
 
   return (
     <Grid container spacing={2}>
-      {savedShowsList.map((artist, index) => (
+      {savedShowsList.map((show, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
             <ListItemAvatar sx={{padding: 1}}>
-              <Avatar alt={artist.showName} src={artist.showImage} className={classes.avatar} />
+              <Avatar alt={show.show.name} src={show.show.images[0].url} className={classes.avatar} />
             </ListItemAvatar>
             <Grid item className={classes.textContainer}>
               <ListItemText
                 primary={
                   <Typography variant="h6" className={classes.primaryText}>
-                    {artist.showName}
+                    {show.show.name.split(' ').slice(0, 2).join(' ')}
                   </Typography>
                 }
                 secondary={
@@ -133,7 +53,7 @@ const SavedShows = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      {artist.showPublisher}
+                      {show.show.publisher}
                     </Typography>
                     <br/>
                     <Typography
@@ -141,7 +61,7 @@ const SavedShows = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      Language: {artist.showLanguage}
+                      Language: {show.show.languages[0]}
                     </Typography>
                   </>
                 }
