@@ -14,7 +14,6 @@ import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { getSpotifyAuthorizationCode, exchangeSpotifyToken } from "../utility/spotifyAuth";
 
 const pages = ["Create Playlist"];
 const settings = ["Profile", "Logout"];
@@ -72,20 +71,6 @@ function ResponsiveAppBar() {
       default:
         console.log("No actions", clicked);
     }
-  };
-
-  const handleSpotifyConnect = () => {
-    // spotify auth
-    const authorizationEndpoint = "https://accounts.spotify.com/authorize";
-    const queryParams = new URLSearchParams({
-      client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
-      redirect_uri: "http://localhost:3000/dashboard",
-      scope: "user-read-private user-read-email user-top-read user-library-read playlist-read-private",
-      response_type: "code",
-    });
-
-    const authorizationURL = `${authorizationEndpoint}?${queryParams.toString()}`;
-    window.location.href = authorizationURL;
   };
 
   return (
@@ -179,12 +164,6 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Button 
-            variant="contained"
-            onClick={handleSpotifyConnect}
-            >
-              Connect to Spotify
-            </Button>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
