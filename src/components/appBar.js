@@ -39,9 +39,8 @@ const logout = async () => {
 
 const exchangeSpotifyToken = async (code) => {
   try {
-    const tokenEndpoint = "https://accounts.spotify.com/api/token";
     const response = await axios.post(
-      tokenEndpoint,
+      "https://accounts.spotify.com/api/token",
       new URLSearchParams({
         grant_type: "authorization_code",
         code: code,
@@ -56,12 +55,10 @@ const exchangeSpotifyToken = async (code) => {
       }
     );
 
-    const accessToken = response.data.access_token;
-    console.log("Access Token:", accessToken);
+    const accessToken = response.data.access_token; // store this as global state
     
     // print out user's data for temp debugging
-    const fetchUserDataEndpoint = "https://api.spotify.com/v1/me";
-    const userResponse = await axios.get(fetchUserDataEndpoint, {
+    const userResponse = await axios.get("https://api.spotify.com/v1/me", {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
