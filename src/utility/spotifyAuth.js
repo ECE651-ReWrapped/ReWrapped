@@ -23,17 +23,8 @@ const exchangeSpotifyToken = async (code) => {
       }
     );
 
-    const accessToken = response.data.access_token; // store this as global state
-    
-    // print out user's data for temp debugging
-    const userResponse = await axios.get("https://api.spotify.com/v1/me", {
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-
-    const userData = userResponse.data;
-    console.log("User Data:", userData);
+    const accessToken = response.data.access_token;
+    console.log("Access token: "+ accessToken);
 
   } catch (error) {
     console.error("Token Exchange Error", error);

@@ -81,7 +81,7 @@ function ResponsiveAppBar() {
     const queryParams = new URLSearchParams({
       client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
       redirect_uri: "http://localhost:3000/dashboard",
-      scope: "user-read-private user-read-email",
+      scope: "user-read-private user-read-email user-top-read user-library-read playlist-read-private",
       response_type: "code",
     });
 

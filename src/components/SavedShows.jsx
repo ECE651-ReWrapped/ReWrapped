@@ -1,49 +1,14 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from '@mui/styles';
 import { Grid, ListItem, ListItemText, ListItemAvatar, Avatar, Typography } from '@mui/material';
+import axios from "axios";
 
-const savedShowsList = [
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    showName: "Some Show",
-    showLanguage: 'EN',
-    showPublisher: "BBC News",
-    showImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  }
-];
+// temp data
+const accessToken = "BQCbal1N8OpX_U10GjpXc-p0YKSkEyQFwK1VpGccfVgfDm7Sl9lYXd48UaWelLT64Zz66Zyku3QwkYs0IEL3oolg9iZL5u_hbLYvbuA8LCAXoIYeE8mCNzvbrTKUwgXyvTrozEOuLfMPGqZaDTBSaFBaVhGCHo0AVX9B7w2DZ-3BAvkRYhtom0X4rK3jDB7rUyDQHo9F6Y6hEA5mjI1v-zTV3kr4KDGfPOESRg";
 
 const useStyles = makeStyles(() => ({
   listItem: {
-    backgroundColor: '#D7EBD5',  
+    backgroundColor: 'white',  
     borderRadius: 16,
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     transition: 'transform 0.3s ease-in-out',
@@ -106,24 +71,44 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-
-
 const SavedShows = () => {
   const classes = useStyles();
+  const [savedShowsList, setSavedShowsList] = useState([]);
+
+  useEffect(() => {
+    const getApiData = async () => {
+      try {
+        const res = await axios.get("https://api.spotify.com/v1/me/shows", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, 
+          },
+          params: {
+            limit: 6,
+            offset: 0,
+          },
+        });
+        setSavedShowsList(res.data.items);
+
+      } catch (err) {
+          console.error("Error fetching saved shows:", err);
+      }
+    };
+    getApiData();
+  }, []);
 
   return (
     <Grid container spacing={2}>
-      {savedShowsList.map((artist, index) => (
+      {savedShowsList.map((show, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
             <ListItemAvatar sx={{padding: 1}}>
-              <Avatar alt={artist.showName} src={artist.showImage} className={classes.avatar} />
+              <Avatar alt={show.show.name} src={show.show.images[0].url} className={classes.avatar} />
             </ListItemAvatar>
             <Grid item className={classes.textContainer}>
               <ListItemText
                 primary={
                   <Typography variant="h6" className={classes.primaryText}>
-                    {artist.showName}
+                    {show.show.name.split(' ').slice(0, 2).join(' ')}
                   </Typography>
                 }
                 secondary={
@@ -133,7 +118,7 @@ const SavedShows = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      {artist.showPublisher}
+                      {show.show.publisher}
                     </Typography>
                     <br/>
                     <Typography
@@ -141,7 +126,7 @@ const SavedShows = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      Language: {artist.showLanguage}
+                      Language: {show.show.language}
                     </Typography>
                   </>
                 }

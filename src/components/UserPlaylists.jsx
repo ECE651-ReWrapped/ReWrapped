@@ -1,49 +1,14 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { makeStyles } from '@mui/styles';
 import { Grid, ListItem, ListItemText, ListItemAvatar, Avatar, Typography } from '@mui/material';
+import axios from "axios";
 
-const listOfPlaylists = [
-  {
-    playlistName: "Some playlist",
-    totalTracks: 20,
-    playlistOwner: "Some Owner",
-    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    playlistName: "Some playlist",
-    totalTracks: 20,
-    playlistOwner: "Some Owner",
-    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    playlistName: "Some playlist",
-    totalTracks: 20,
-    playlistOwner: "Some Owner",
-    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    playlistName: "Some playlist",
-    totalTracks: 20,
-    playlistOwner: "Some Owner",
-    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    playlistName: "Some playlist",
-    totalTracks: 20,
-    playlistOwner: "Some Owner",
-    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  },
-  {
-    playlistName: "Some playlist",
-    totalTracks: 20,
-    playlistOwner: "Some Owner",
-    playlistImage: "https://i.scdn.co/image/ab6761610000f178de20f1d3bdfc3239a770921c"
-  }
-];
+// temp data
+const accessToken = "BQCbal1N8OpX_U10GjpXc-p0YKSkEyQFwK1VpGccfVgfDm7Sl9lYXd48UaWelLT64Zz66Zyku3QwkYs0IEL3oolg9iZL5u_hbLYvbuA8LCAXoIYeE8mCNzvbrTKUwgXyvTrozEOuLfMPGqZaDTBSaFBaVhGCHo0AVX9B7w2DZ-3BAvkRYhtom0X4rK3jDB7rUyDQHo9F6Y6hEA5mjI1v-zTV3kr4KDGfPOESRg";
 
 const useStyles = makeStyles(() => ({
   listItem: {
-    backgroundColor: '#D7EBD5',  
+    backgroundColor: 'white',  
     borderRadius: 16,
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     transition: 'transform 0.3s ease-in-out',
@@ -107,23 +72,43 @@ const useStyles = makeStyles(() => ({
 }));
 
 
-
 const UserPlaylists = () => {
   const classes = useStyles();
+  const [userPlaylists, setUserPlaylists] = useState([]);
+
+  useEffect(() => {
+    const getApiData = async () => {
+      try {
+        const res = await axios.get("https://api.spotify.com/v1/me/playlists", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, 
+          },
+          params: {
+            limit: 6, 
+            offset: 0
+          }
+        });
+        setUserPlaylists(res.data.items);
+      } catch (err) {
+        console.error("Failed to fetch data: ", err);
+      }
+    };
+    getApiData();
+  }, []);
 
   return (
     <Grid container spacing={2} >
-      {listOfPlaylists.map((artist, index) => (
+      {userPlaylists.map((playlist, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
             <ListItemAvatar sx={{padding: 1}}>
-              <Avatar alt={artist.playlistName} src={artist.playlistImage} className={classes.avatar} />
+              <Avatar alt={playlist.name} src={playlist.images[0].url} className={classes.avatar} />
             </ListItemAvatar>
             <Grid item className={classes.textContainer}>
               <ListItemText
                 primary={
                   <Typography variant="h6" className={classes.primaryText}>
-                    {artist.playlistName}
+                    {playlist.name.split(' ').slice(0, 2).join(' ')}
                   </Typography>
                 }
                 secondary={
@@ -133,7 +118,7 @@ const UserPlaylists = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      {artist.playlistOwner}
+                      {playlist.owner.display_name}
                     </Typography>
                     <br/>
                     <Typography
@@ -141,7 +126,7 @@ const UserPlaylists = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      Popularity: {artist.totalTracks}
+                      Popularity: {playlist.tracks.total}
                     </Typography>
                   </>
                 }
