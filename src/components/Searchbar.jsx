@@ -56,9 +56,7 @@ const Searchbar = () => {
       {isLoading ? (
         <div>Loading...</div>
       ) : (
-        results.map((user, index) => (
-          <div key={index}>{user.user_name}</div> // Make sure your key is unique
-        ))
+        results.map((user) => <div key={user.user_name}>{user.user_name}</div>)
       )}
     </>
   );
