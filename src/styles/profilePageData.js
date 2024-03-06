@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
   listItem: {
-    backgroundColor: 'white',  
+    backgroundColor: '#EDEDED',  
     borderRadius: 16,
     boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
     transition: 'transform 0.3s ease-in-out',
