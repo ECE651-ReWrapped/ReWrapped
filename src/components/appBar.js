@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,6 +18,11 @@ import axios from "axios";
 const pages = [];
 const settings = ["Profile", "Logout"];
 
+const getSpotifyAuthorizationCode = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get("code");
+};
+
 const logout = async () => {
   try {
     const res = await axios.post(
@@ -32,8 +37,54 @@ const logout = async () => {
   }
 };
 
+const exchangeSpotifyToken = async (code) => {
+  try {
+    const tokenEndpoint = "https://accounts.spotify.com/api/token";
+    const response = await axios.post(
+      tokenEndpoint,
+      new URLSearchParams({
+        grant_type: "authorization_code",
+        code: code,
+        redirect_uri: "http://localhost:3000/dashboard",
+        client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+        client_secret: process.env.REACT_APP_SPOTIFY_CLIENT_SECRET,
+      }),
+      {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+      }
+    );
+
+    const accessToken = response.data.access_token;
+    console.log("Access Token:", accessToken);
+    
+    // print out user's data for temp debugging
+    const fetchUserDataEndpoint = "https://api.spotify.com/v1/me";
+    const userResponse = await axios.get(fetchUserDataEndpoint, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    const userData = userResponse.data;
+    console.log("User Data:", userData);
+
+  } catch (error) {
+    console.error("Token Exchange Error", error);
+  }
+};
+
+
 function ResponsiveAppBar() {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const spotifyCode = getSpotifyAuthorizationCode();
+    if (spotifyCode) {
+      exchangeSpotifyToken(spotifyCode);
+    }
+  });
 
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
@@ -63,6 +114,20 @@ function ResponsiveAppBar() {
       default:
         console.log("No actions", clicked);
     }
+  };
+
+  const handleSpotifyConnect = () => {
+    // spotify auth
+    const authorizationEndpoint = "https://accounts.spotify.com/authorize";
+    const queryParams = new URLSearchParams({
+      client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+      redirect_uri: "http://localhost:3000/dashboard",
+      scope: "user-read-private user-read-email",
+      response_type: "code",
+    });
+
+    const authorizationURL = `${authorizationEndpoint}?${queryParams.toString()}`;
+    window.location.href = authorizationURL;
   };
 
   return (
@@ -156,6 +221,12 @@ function ResponsiveAppBar() {
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            <Button 
+            variant="contained"
+            onClick={handleSpotifyConnect}
+            >
+              Connect to Spotify
+            </Button>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
