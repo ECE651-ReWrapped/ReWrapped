@@ -61,7 +61,7 @@ const SavedShows = () => {
                       variant="body2"
                       className={classes.secondaryText}
                     >
-                      Language: {show.show.language}
+                      Language: {show.show.languages[0]}
                     </Typography>
                   </>
                 }
