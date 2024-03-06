@@ -35,14 +35,6 @@ const logout = async () => {
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const spotifyCode = getSpotifyAuthorizationCode();
-    if (spotifyCode) {
-      exchangeSpotifyToken(spotifyCode);
-    }
-  });
-
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
 
