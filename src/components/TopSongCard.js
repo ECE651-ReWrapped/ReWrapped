@@ -3,23 +3,23 @@ import Avatar from '@mui/material/Avatar';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
-import { CiCirclePlus } from "react-icons/ci";
+import { BsPlusCircleFill } from "react-icons/bs";
 import IconButton from '@mui/material/IconButton';
 
 function TopSongCard({ mData }) {
     const cardStyle = {
         backgroundColor: '#F0F2F5',
         borderRadius: '12px',
-        padding: '10px',
-        marginBottom: '20px',
+        padding: '8px',
+        margin: '0 150px'
     };
 
     return (
         <div style={cardStyle}>
             <ListItem
                 secondaryAction={
-                    <IconButton edge="end" aria-label="delete">
-                        <CiCirclePlus />
+                    <IconButton edge="end" aria-label="add">
+                        <BsPlusCircleFill style={{ color: '1DB954' }}  />
                     </IconButton>
                 }
             >

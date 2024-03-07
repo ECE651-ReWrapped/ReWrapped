@@ -1450,6 +1450,11 @@
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.1.tgz#16308cea045f0fc777b6ff20a9f25474dd8293d2"
   integrity sha512-9TANp6GPoMtYzQdt54kfAyMmz1+osLlXdg2ENroU7zzrtflTLrrC/lgrIfaSe+Wu0b89GKccT7vxXA0MoAIO+Q==
 
+"@fontsource-variable/work-sans@^5.0.18":
+  version "5.0.18"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/work-sans/-/work-sans-5.0.18.tgz#f3f8ada1217c933a2e523011c65d0f0f09f954c9"
+  integrity sha512-g9QIvni8hnIJdS7e2/Ba1pvHBA2HlIfohhAtycV3kw8t4rj7vIu6efJz5Qvh7I+Qy5vCIfog1fylvqsFeCEx+A==
+
 "@fontsource/inter@^5.0.16":
   version "5.0.16"
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.16.tgz#b858508cdb56dcbbf3166903122851e2fbd16b50"
