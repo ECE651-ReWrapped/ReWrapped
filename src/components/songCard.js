@@ -1,38 +1,20 @@
 import React from 'react';
-import Typography from '@mui/material/Typography';
-import ListItem from '@mui/material/ListItem';
-import Divider from '@mui/material/Divider';
-import ListItemText from '@mui/material/ListItemText';
-import ListItemAvatar from '@mui/material/ListItemAvatar';
-import Avatar from '@mui/material/Avatar';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import Chip from '@mui/material/Chip';
 
-function SongCard({ artist, album, name, albumArt }) {
+function SongCard({ row }) {
     return (
-
-        <div>
-            <ListItem>
-                <ListItemAvatar>
-                    <Avatar alt="album art" src={albumArt} />
-                </ListItemAvatar>
-                <ListItemText
-                    primary={name}
-                    secondary={
-                        <React.Fragment>
-                            <Typography
-                                sx={{ display: 'inline' }}
-                                component="span"
-                                variant="body2"
-                                color="text.primary"
-                            >
-                                {artist}
-                            </Typography>
-                            {" -  "} {album}
-                        </React.Fragment>
-                    }
-                />
-            </ListItem>
-            <Divider />
-        </div>
+        <TableRow
+            key={row.track_name}
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        >
+            <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif" }} component="th" scope="row">
+                {row.track_name}
+            </TableCell>
+            <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif", color: "#61758A" }}>{row.artists}</TableCell>
+            <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', color: "#121417" }} align="right"><Chip label="Alt Rock, Metal" /></TableCell>
+        </TableRow>
     );
 }
 

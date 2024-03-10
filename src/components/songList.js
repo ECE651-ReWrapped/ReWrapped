@@ -1,23 +1,32 @@
 import React from 'react';
 import SongCard from './songCard';
-import { List, Container } from '@mui/material';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 function SongList({ musicData }) {
     return (
-        <Container maxWidth="sm" style={{ borderRadius: '10px', border: '2px solid #ccc'}}>
-            <List>
-                {musicData.slice(0,10).map((music, index) => (
-                    <SongCard
-                        name={music.track_name}
-                        artist={music.artists}
-                        album={""}
-                        albumArt={''}
-                        // album={music.album}
-                        // albumArt={music.albumArt}
-                    />
-                ))}
-            </List>
-        </Container>
+        <TableContainer style={{ borderRadius: '10px', border: '1px solid #ccc' }}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                <TableHead>
+                    <TableRow>
+                        <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif" }}>Track</TableCell>
+                        <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif", color: "#61758A" }} >Artist</TableCell>
+                        <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold' }} align="right">Genres</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {musicData.map((row) => (
+                        <SongCard row={row} />
+                    ))}
+                </TableBody>
+            </Table>
+        </TableContainer>
+
+
     );
 }
 
