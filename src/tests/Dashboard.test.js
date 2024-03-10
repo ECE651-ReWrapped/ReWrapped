@@ -1,7 +1,6 @@
-// ItemList.test.js
 import React from 'react';
 import { render } from '@testing-library/react';
-import axios from 'axios'; // Mock axios for API requests
+import axios from 'axios';
 import Dashboard from '../pages/Dashboard';
 
 const sampleSongData = [
