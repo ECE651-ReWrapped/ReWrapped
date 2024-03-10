@@ -1,13 +1,11 @@
 import React from 'react';
 import SongCard from './songCard';
-import { List, Container } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
 import Chip from '@mui/material/Chip';
 
 function SongList({ musicData }) {
@@ -16,9 +14,9 @@ function SongList({ musicData }) {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Track</TableCell>
-                        <TableCell >Artist</TableCell>
-                        <TableCell align="right">Genres</TableCell>
+                        <TableCell style={{fontFamily: "Work Sans Variable, sans-serif"}}>Track</TableCell>
+                        <TableCell style={{fontFamily: "Work Sans Variable, sans-serif", color:"#61758A"}} >Artist</TableCell>
+                        <TableCell style={{fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold'}} align="right">Genres</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -27,11 +25,11 @@ function SongList({ musicData }) {
                             key={row.track_name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <TableCell component="th" scope="row">
+                            <TableCell style={{fontFamily: "Work Sans Variable, sans-serif"}} component="th" scope="row">
                                 {row.track_name}
                             </TableCell>
-                            <TableCell>{row.artists}</TableCell>
-                            <TableCell align="right"><Chip label="Alt Rock, Metal" /></TableCell>
+                            <TableCell style={{fontFamily: "Work Sans Variable, sans-serif", color:"#61758A"}}>{row.artists}</TableCell>
+                            <TableCell style={{fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', color: "#121417"}} align="right"><Chip label="Alt Rock, Metal" /></TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

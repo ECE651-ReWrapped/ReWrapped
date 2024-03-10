@@ -136,7 +136,7 @@ function Dashboard() {
           {/* <Typography variant="h5" mb={5} textAlign={"center"}>
             Top Song For Today.
           </Typography> */}
-          <TopSongCard mData={topSongCardData} />
+          <TopSongCard mt={7} mData={topSongCardData} />
           {/* <Typography variant="h5" textAlign={"center"}>
             Listening Metrics
           </Typography> */}
@@ -145,7 +145,7 @@ function Dashboard() {
             sx={{
               display: "flex",
               justifyContent: "center",
-              pt: 5,
+              pt: 10,
               pb: 12,
               height: "250px",
             }}
@@ -169,11 +169,11 @@ function Dashboard() {
           </Box>
         </Grid>
 
-        <Grid container spacing={6}>
+        <Grid container spacing={6} mt={7}>
           <Grid item xs={12}>
             <Typography
               padding="5px"
-              style={{ textAlign: "center" }}
+              style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', textAlign: 'left' }}
               variant="h5"
               gutterBottom
             >
@@ -184,7 +184,7 @@ function Dashboard() {
           <Grid item xs={12}>
             <Typography
               padding="5px"
-              style={{ textAlign: "center" }}
+              style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', textAlign: 'left' }}
               variant="h5"
               gutterBottom
             >
