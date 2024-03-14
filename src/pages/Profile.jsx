@@ -5,7 +5,6 @@ import TopTracks from "../components/TopTracks";
 import ProfileBar from "../components/ProfileBar";
 import SavedShows from "../components/SavedShows";
 import UserPlaylists from "../components/UserPlaylists";
-import "@fontsource/inter";
 import ResponsiveAppBar from "../components/appBar";
 
 const UserProfile = () => {
@@ -32,7 +31,7 @@ const UserProfile = () => {
               marginTop: 25,
               fontWeight: "bold",
               fontSize: "28px",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "sans-serif",
               color: "#333",
               textAlign: "center",
               padding: "15px",
@@ -57,7 +56,7 @@ const UserProfile = () => {
               marginTop: 50,
               fontWeight: "bold",
               fontSize: "28px",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "sans-serif",
               color: "#333",
               textAlign: "center",
               padding: "15px",
@@ -82,7 +81,7 @@ const UserProfile = () => {
               marginTop: 50,
               fontWeight: "bold",
               fontSize: "28px",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "sans-serif",
               color: "#333",
               textAlign: "center",
               padding: "15px",
@@ -108,7 +107,7 @@ const UserProfile = () => {
               marginTop: 50,
               fontWeight: "bold",
               fontSize: "28px",
-              fontFamily: "Inter, sans-serif",
+              fontFamily: "sans-serif",
               color: "#333",
               textAlign: "center",
               padding: "15px",

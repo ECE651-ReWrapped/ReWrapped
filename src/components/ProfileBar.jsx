@@ -1,5 +1,4 @@
 import { Avatar, Typography, Grid } from "@mui/material";
-import '@fontsource/inter';
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -68,7 +67,7 @@ const ProfileBar = () => {
             }}
             />
             <Typography variant="h5" 
-            sx={{ mt: 2, fontFamily: 'Inter', color: '#1DB954', fontWeight:'bold', fontSize: '25px',
+            sx={{ mt: 2, fontFamily: ['sans-sarif'], color: '#1DB954', fontWeight:'bold', fontSize: '25px',
                 '@media (min-width: 600px)' : {
                     fontSize: '40px'
                 },
@@ -116,7 +115,7 @@ const ProfileBar = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center">
-                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: '#F9F9F9',
+                    <Typography sx={{fontSize: '14px', fontFamily: ['sans-sarif'], fontWeight: 'bold', color: '#F9F9F9',
                         '@media (min-width: 600px)' : {
                             fontSize: '16px'
                         },
@@ -138,7 +137,7 @@ const ProfileBar = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center">
-                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: '#F9F9F9',
+                    <Typography sx={{fontSize: '14px', fontFamily: ['sans-sarif'], fontWeight: 'bold', color: '#F9F9F9',
                     '@media (min-width: 600px)' : {
                         fontSize: '16px'
                     },
@@ -160,7 +159,7 @@ const ProfileBar = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center">
-                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: '#F9F9F9',
+                    <Typography sx={{fontSize: '14px', fontFamily: ['sans-sarif'], fontWeight: 'bold', color: '#F9F9F9',
                     '@media (min-width: 600px)' : {
                             fontSize: '16px'
                         },
