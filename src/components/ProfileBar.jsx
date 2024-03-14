@@ -6,6 +6,23 @@ import axios from "axios";
 // temp data
 const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN;
 
+const sampleProfileData = {
+    images: [ 
+        { 
+            url: "https://media.gettyimages.com/id/501270498/photo/a-dragon-ball-action-figure-during-the-fair-second-edition-of-xmas-comics-and-games-a.jpg?s=612x612&w=0&k=20&c=kO1cNxjXIaa3f5wnMzxuqp1U2nSrSCMV72X-c0_fA68=" 
+        },
+        { 
+            url: "https://media.gettyimages.com/id/501270498/photo/a-dragon-ball-action-figure-during-the-fair-second-edition-of-xmas-comics-and-games-a.jpg?s=612x612&w=0&k=20&c=kO1cNxjXIaa3f5wnMzxuqp1U2nSrSCMV72X-c0_fA68=" 
+        }
+    ],
+    display_name: "John Doe",
+    email: 'johndoe@gmail.com',
+    country: 'CA',
+    followers: { total: 25 },
+    product: 'Free',
+    id: '834huj23762556ghchbyfg356786'
+};
+
 const ProfileBar = () => {
     const [spotifyUserData, setSpotifyUserData] = useState();
     
@@ -25,7 +42,7 @@ const ProfileBar = () => {
         getApiData();
     }, []);
 
-    if (!spotifyUserData) {
+    if (!sampleProfileData) {
         return null;
     }
 
@@ -36,10 +53,10 @@ const ProfileBar = () => {
             direction="column" 
             justifyContent="center"
             alignItems="center" 
-            sx={{backgroundColor: '#EFEFEF'}}
+            sx={{backgroundColor: '#282828'}}
         >
             <Avatar
-            src={spotifyUserData.images[1].url}
+            src={sampleProfileData.images[1].url}
             alt="Profile Photo not available"
             sx={{ width: '200px', height: '200px', borderRadius: '50%', 
             '@media (min-width: 600px)' : {
@@ -60,9 +77,9 @@ const ProfileBar = () => {
                 } 
             }}
             >
-                {spotifyUserData.display_name}
+                {sampleProfileData.display_name}
             </Typography>
-            <Typography sx={{color: 'grey', fontSize: '15px', 
+            <Typography sx={{color: '#F9F9F9', fontSize: '15px', 
             '@media (min-width: 600px)' : {
                     fontSize: '20px'
                 },
@@ -71,9 +88,9 @@ const ProfileBar = () => {
                 } 
             }}
             >
-                {spotifyUserData.email}
+                {sampleProfileData.email}
             </Typography>
-            <Typography sx={{ color: 'grey', fontSize: '15px',
+            <Typography sx={{ color: '#F9F9F9', fontSize: '15px',
                 '@media (min-width: 600px)' : {
                     fontSize: '20px'
                 },
@@ -81,7 +98,7 @@ const ProfileBar = () => {
                     fontSize: '20px'
                 } 
             }}>
-                {spotifyUserData.country}
+                {sampleProfileData.country}
             </Typography>
             <Grid 
             container
@@ -99,7 +116,7 @@ const ProfileBar = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center">
-                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: 'grey',
+                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: '#F9F9F9',
                         '@media (min-width: 600px)' : {
                             fontSize: '16px'
                         },
@@ -109,8 +126,8 @@ const ProfileBar = () => {
                     }}>
                         Followers
                     </Typography>
-                    <Typography sx={{color: 'grey'}}>
-                        {spotifyUserData.followers.total}
+                    <Typography sx={{color: '#F9F9F9'}}>
+                        {sampleProfileData.followers.total}
                     </Typography>
                 </Grid>
                 <Grid item 
@@ -121,7 +138,7 @@ const ProfileBar = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center">
-                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: 'grey',
+                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: '#F9F9F9',
                     '@media (min-width: 600px)' : {
                         fontSize: '16px'
                     },
@@ -131,8 +148,8 @@ const ProfileBar = () => {
                 }}>
                         Subscription
                     </Typography>
-                    <Typography sx={{color: 'grey'}}>
-                        {spotifyUserData.product}
+                    <Typography sx={{color: '#F9F9F9'}}>
+                        {sampleProfileData.product}
                     </Typography>
                 </Grid>
                 <Grid item 
@@ -143,7 +160,7 @@ const ProfileBar = () => {
                 direction="column"
                 justifyContent="center"
                 alignItems="center">
-                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: 'grey',
+                    <Typography sx={{fontSize: '14px', fontFamily: 'Inter', fontWeight: 'bold', color: '#F9F9F9',
                     '@media (min-width: 600px)' : {
                             fontSize: '16px'
                         },
@@ -154,8 +171,8 @@ const ProfileBar = () => {
                     >
                         Spotify ID
                     </Typography>
-                    <Typography sx={{color: 'grey'}}>
-                        {spotifyUserData.id.substring(0, 11)}
+                    <Typography sx={{color: '#F9F9F9'}}>
+                        {sampleProfileData.id.substring(0, 11)}
                     </Typography>
                 </Grid>
             </Grid>
