@@ -31,7 +31,8 @@ const TopTracks = () => {
   }, []);
 
   return (
-    <Grid container spacing={2} >
+    <>
+    {userTopTracks ? <Grid container spacing={2} >
       {userTopTracks.map((track, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
@@ -69,7 +70,8 @@ const TopTracks = () => {
           </ListItem>
         </Grid>
       ))}
-    </Grid>
+    </Grid> : <p>You don't have any top tracks!</p> }
+    </>
   );
 };
 

@@ -30,7 +30,8 @@ const FollowingArtists = () => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
+    <>
+    {userArtists? <Grid container spacing={2}>
       {userArtists.map((artist, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
@@ -68,7 +69,8 @@ const FollowingArtists = () => {
           </ListItem>
         </Grid>
       ))}
-    </Grid>
+    </Grid> : <p>You don't follow any artists!</p>}
+    </>
   );
 };
 
