@@ -31,7 +31,8 @@ const SavedShows = () => {
   }, []);
 
   return (
-    <Grid container spacing={2}>
+    <>
+    {savedShowsList ? <Grid container spacing={2}>
       {savedShowsList.map((show, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
@@ -69,7 +70,8 @@ const SavedShows = () => {
           </ListItem>
         </Grid>
       ))}
-    </Grid>
+    </Grid> : <p>You don't have any saved shows!</p>}
+    </>
   );
 };
 

@@ -30,7 +30,8 @@ const UserPlaylists = () => {
   }, []);
 
   return (
-    <Grid container spacing={2} >
+    <>
+    {userPlaylists? <Grid container spacing={2} >
       {userPlaylists.map((playlist, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
@@ -66,9 +67,10 @@ const UserPlaylists = () => {
               />
             </Grid>
           </ListItem>
-        </Grid>
+        </Grid> 
       ))}
-    </Grid>
+    </Grid> : <p>You don't have any playlists! </p> }
+    </>
   );
 };
 

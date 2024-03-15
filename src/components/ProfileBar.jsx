@@ -37,7 +37,7 @@ const ProfileBar = () => {
             sx={{backgroundColor: '#282828'}}
         >
             <Avatar
-            src={spotifyUserData.images[1].url}
+            src={spotifyUserData.images[1].url ? spotifyUserData.images[1].url : "https://static.vecteezy.com/system/resources/thumbnails/009/734/564/small/default-avatar-profile-icon-of-social-media-user-vector.jpg"}
             alt="Profile Photo not available"
             sx={{ width: '200px', height: '200px', borderRadius: '50%', 
             '@media (min-width: 600px)' : {
