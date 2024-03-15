@@ -8,11 +8,11 @@ import FollowingArtists from '../components/FollowingArtists';
 import SavedShows from '../components/SavedShows';
 import TopTracks from '../components/TopTracks';
 import UserPlaylists from '../components/UserPlaylists';
+import ProfileBar from '../components/ProfileBar';
 import axios from 'axios';
 
 
 jest.mock('axios');
-
 
 describe("User Profile page tests", () => {
     test("renders user profile page content", () => {
@@ -295,5 +295,73 @@ describe('UserPlaylists component', () => {
 
         expect(playlist1Popularity).toBeInTheDocument();
         expect(playlist2Popularity).toBeInTheDocument();
+    });
+});
+
+describe('ProfileBar component', () => {
+    beforeEach(() => {
+        axios.get.mockResolvedValueOnce({
+            data: {
+                display_name: 'John Doe',
+                email: 'johndoe@example.com',
+                country: 'US',
+                followers: { total: 100 },
+                product: 'premium',
+                id: '1234567890abcdefghi',
+                images: [{ url: 'profile-photo.jpg' }, { url: 'profile-photo.jpg' }],
+            },
+        });
+    });
+
+    test('renders user data correctly', async () => {
+        const { findByText } = render(
+        <Provider store={store} >
+            <ProfileBar />
+        </Provider>
+        );
+
+        expect(await findByText('John Doe')).toBeInTheDocument();
+        expect(await findByText('johndoe@example.com')).toBeInTheDocument();
+        expect(await findByText('US')).toBeInTheDocument();
+        expect(await findByText('100')).toBeInTheDocument();
+        expect(await findByText('premium')).toBeInTheDocument();
+        expect(await findByText('1234567890a')).toBeInTheDocument(); 
+    });
+
+    test('renders default profile photo if user photo is not available', async () => {
+        axios.get.mockResolvedValueOnce({
+            data: {
+                display_name: 'Jane Doe',
+                email: 'janedoe@example.com',
+                country: 'UK',
+                followers: { total: 50 },
+                product: 'free',
+                id: 'abcdefghij0123456789',
+                images: [],
+            },
+        });
+
+        const { findByAltText } = render(
+            <Provider store={store} >
+                <ProfileBar />
+            </Provider>
+        );
+
+        const profilePhoto = await findByAltText('Profile Photo not available');
+        expect(profilePhoto).toBeInTheDocument();
+    });
+
+    test('renders null if spotifyUserData is null', async () => {
+        // Mocking null spotifyUserData
+        axios.get.mockResolvedValueOnce({
+            data: null,
+        });
+
+        const { container } = render(
+            <Provider store={store} >
+                <ProfileBar />
+            </Provider>
+        );
+        expect(container.firstChild).toBeNull();
     });
 });
