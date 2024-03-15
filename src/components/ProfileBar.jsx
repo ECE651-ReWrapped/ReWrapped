@@ -1,29 +1,11 @@
 import { Avatar, Typography, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
-// temp data
-const accessToken = process.env.REACT_APP_SPOTIFY_ACCESS_TOKEN;
-
-const sampleProfileData = {
-    images: [ 
-        { 
-            url: "https://media.gettyimages.com/id/501270498/photo/a-dragon-ball-action-figure-during-the-fair-second-edition-of-xmas-comics-and-games-a.jpg?s=612x612&w=0&k=20&c=kO1cNxjXIaa3f5wnMzxuqp1U2nSrSCMV72X-c0_fA68=" 
-        },
-        { 
-            url: "https://media.gettyimages.com/id/501270498/photo/a-dragon-ball-action-figure-during-the-fair-second-edition-of-xmas-comics-and-games-a.jpg?s=612x612&w=0&k=20&c=kO1cNxjXIaa3f5wnMzxuqp1U2nSrSCMV72X-c0_fA68=" 
-        }
-    ],
-    display_name: "John Doe",
-    email: 'johndoe@gmail.com',
-    country: 'CA',
-    followers: { total: 25 },
-    product: 'Free',
-    id: '834huj23762556ghchbyfg356786'
-};
+import { useSelector } from "react-redux";
 
 const ProfileBar = () => {
     const [spotifyUserData, setSpotifyUserData] = useState();
+    const accessToken = useSelector(state => state.spotify.accessToken);
     
     useEffect(() => {
         const getApiData = async () => {
@@ -41,7 +23,7 @@ const ProfileBar = () => {
         getApiData();
     }, []);
 
-    if (!sampleProfileData) {
+    if (!spotifyUserData) {
         return null;
     }
 
@@ -55,7 +37,7 @@ const ProfileBar = () => {
             sx={{backgroundColor: '#282828'}}
         >
             <Avatar
-            src={sampleProfileData.images[1].url}
+            src={spotifyUserData.images[1].url}
             alt="Profile Photo not available"
             sx={{ width: '200px', height: '200px', borderRadius: '50%', 
             '@media (min-width: 600px)' : {
@@ -76,7 +58,7 @@ const ProfileBar = () => {
                 } 
             }}
             >
-                {sampleProfileData.display_name}
+                {spotifyUserData.display_name}
             </Typography>
             <Typography sx={{color: '#F9F9F9', fontSize: '15px', 
             '@media (min-width: 600px)' : {
@@ -87,7 +69,7 @@ const ProfileBar = () => {
                 } 
             }}
             >
-                {sampleProfileData.email}
+                {spotifyUserData.email}
             </Typography>
             <Typography sx={{ color: '#F9F9F9', fontSize: '15px',
                 '@media (min-width: 600px)' : {
@@ -97,7 +79,7 @@ const ProfileBar = () => {
                     fontSize: '20px'
                 } 
             }}>
-                {sampleProfileData.country}
+                {spotifyUserData.country}
             </Typography>
             <Grid 
             container
@@ -126,7 +108,7 @@ const ProfileBar = () => {
                         Followers
                     </Typography>
                     <Typography sx={{color: '#F9F9F9'}}>
-                        {sampleProfileData.followers.total}
+                        {spotifyUserData.followers.total}
                     </Typography>
                 </Grid>
                 <Grid item 
@@ -148,7 +130,7 @@ const ProfileBar = () => {
                         Subscription
                     </Typography>
                     <Typography sx={{color: '#F9F9F9'}}>
-                        {sampleProfileData.product}
+                        {spotifyUserData.product}
                     </Typography>
                 </Grid>
                 <Grid item 
@@ -171,7 +153,7 @@ const ProfileBar = () => {
                         Spotify ID
                     </Typography>
                     <Typography sx={{color: '#F9F9F9'}}>
-                        {sampleProfileData.id.substring(0, 11)}
+                        {spotifyUserData.id.substring(0, 11)}
                     </Typography>
                 </Grid>
             </Grid>

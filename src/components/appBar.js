@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -15,8 +15,10 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import { getSpotifyAuthorizationCode, exchangeSpotifyToken } from "../utility/spotifyAuth";
+
 const pages = ["Create Playlist"];
-const settings = ["Profile", "Logout"];
+const settings = ["Profile", "Connect Spotify", "Logout"];
 
 const logout = async () => {
   try {
@@ -32,10 +34,33 @@ const logout = async () => {
   }
 };
 
+
+const handleSpotifyConnect = () => {
+  const authorizationEndpoint = "https://accounts.spotify.com/authorize";
+  const queryParams = new URLSearchParams({
+    client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
+    redirect_uri: "http://localhost:3000/dashboard",
+    scope: "user-read-private user-read-email user-top-read user-library-read playlist-read-private",
+    response_type: "code",
+  });
+
+  const authorizationURL = `${authorizationEndpoint}?${queryParams.toString()}`;
+  window.location.href = authorizationURL;
+};
+
+
 function ResponsiveAppBar() {
   const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = useState(null);
   const [anchorElUser, setAnchorElUser] = useState(null);
+
+  // spotify frontend auth
+  useEffect(() => {
+    const spotifyCode = getSpotifyAuthorizationCode();
+    if (spotifyCode) {
+      exchangeSpotifyToken(spotifyCode);
+    }
+  });
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -58,6 +83,9 @@ function ResponsiveAppBar() {
       case "Logout":
         logout();
         navigate("/");
+        break;
+      case "Connect Spotify":
+        handleSpotifyConnect();
         break;
       default:
         console.log("No actions", clicked);
