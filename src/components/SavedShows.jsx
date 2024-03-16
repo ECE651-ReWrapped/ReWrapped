@@ -28,7 +28,7 @@ const SavedShows = () => {
       }
     };
     getApiData();
-  }, []);
+  }, [accessToken]);
 
   return (
     <>

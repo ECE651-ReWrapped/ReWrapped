@@ -21,7 +21,7 @@ const ProfileBar = () => {
             }
         };
         getApiData();
-    }, []);
+    }, [accessToken]);
 
     if (!spotifyUserData) {
         return null;

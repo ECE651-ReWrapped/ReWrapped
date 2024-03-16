@@ -69,7 +69,16 @@ function ResponsiveAppBar() {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu = (e) => {
+    const clicked = e.target.textContent;
+    switch (clicked) {
+      case "Create Playlist":
+        navigate("/createPlaylist");
+        break;
+      default:
+        console.log("No actions", clicked);
+        break;
+    }
     setAnchorElNav(null);
   };
 
@@ -90,6 +99,8 @@ function ResponsiveAppBar() {
       default:
         console.log("No actions", clicked);
     }
+    // clicking on the icon will close the dropdown menu
+    setAnchorElUser(null);
   };
 
   return (

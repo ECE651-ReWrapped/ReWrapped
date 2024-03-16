@@ -27,7 +27,7 @@ const FollowingArtists = () => {
       }
     };
     getApiData();
-  }, []);
+  }, [accessToken]);
 
   return (
     <>

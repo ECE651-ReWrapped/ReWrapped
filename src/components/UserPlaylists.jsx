@@ -27,7 +27,7 @@ const UserPlaylists = () => {
       }
     };
     getApiData();
-  }, []);
+  }, [accessToken]);
 
   return (
     <>

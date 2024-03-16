@@ -28,7 +28,7 @@ const TopTracks = () => {
       }
     };
     getApiData();
-  }, []);
+  }, [accessToken]);
 
   return (
     <>
