@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { IconButton, TextField } from "@mui/material";
+import { IconButton, TextField, CircularProgress, Grid } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { debounce } from "../utility/debounce";
 import axios from "axios";
+import { useStyles } from "../styles/searchBar";
 
 const Searchbar = () => {
+  const classes = useStyles();
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -39,9 +41,10 @@ const Searchbar = () => {
   }, [query]);
 
   return (
-    <>
-      <form onSubmit={(e) => e.preventDefault()}>
+    <div className={classes.container}>
+      <form onSubmit={(e) => e.preventDefault()} className={classes.searchContainer}>
         <TextField
+          className={classes.searchInput}
           id="search-bar"
           onChange={(e) => setQuery(e.target.value)}
           label="Find users"
@@ -50,15 +53,20 @@ const Searchbar = () => {
           size="large"
         />
         <IconButton type="submit" aria-label="search">
-          <SearchIcon />
+          <SearchIcon className={classes.searchIcon} />
         </IconButton>
       </form>
-      {isLoading ? (
-        <div>Loading...</div>
-      ) : (
-        results.map((user) => <div key={user.user_name}>{user.user_name}</div>)
+      {isLoading ? <CircularProgress color="success" className={classes.loading} /> 
+      : (
+        <div className={classes.resultsContainer}>
+          {results.map((user) => (
+            <div key={user.user_name} className={classes.resultItem}>
+              {user.user_name}
+            </div>
+          ))}
+        </div>
       )}
-    </>
+    </div>
   );
 };
 
