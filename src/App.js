@@ -5,7 +5,10 @@ import Home from "./pages/Home";
 import { ErrorPage } from "./pages/ErrorPage";
 import Login from "./containers/Login";
 import Dashboard from "./pages/Dashboard";
-import "./App.css";
+import ForgotPassword from "./pages/ForgotPassword";
+import UserProfile from "./pages/Profile";
+import SetNewPassword from "./pages/SetNewPassword";
+import CreatePlaylist from "./pages/CreatePlaylist";
 
 const router = createBrowserRouter([
   {
@@ -26,8 +29,32 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: (
-      <ProtectedRoute isAuthenticated={true}>
+      <ProtectedRoute>
         <Dashboard />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/reset-password/:token",
+    element: <SetNewPassword />,
+  },
+  {
+    path: "/reset-password",
+    element: <ForgotPassword />,
+  },
+  {
+    path: "/profile",
+    element: (
+      <ProtectedRoute>
+        <UserProfile />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/createPlaylist",
+    element: (
+      <ProtectedRoute>
+        <CreatePlaylist />
       </ProtectedRoute>
     ),
   },

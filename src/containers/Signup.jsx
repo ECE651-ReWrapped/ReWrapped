@@ -56,7 +56,7 @@ const Signup = () => {
   });
 
   return (
-    <>
+    <Grid container padding={10}>
       <Grid
         container
         display={"flex"}
@@ -157,7 +157,7 @@ const Signup = () => {
           </Grid>
         </Grid>
       </Box>
-    </>
+    </Grid>
   );
 };
 
