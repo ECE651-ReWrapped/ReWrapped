@@ -15,7 +15,10 @@ import AdbIcon from "@mui/icons-material/Adb";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import { getSpotifyAuthorizationCode, exchangeSpotifyToken } from "../utility/spotifyAuth";
+import {
+  getSpotifyAuthorizationCode,
+  exchangeSpotifyToken,
+} from "../utility/spotifyAuth";
 
 const pages = ["Create Playlist"];
 const settings = ["Profile", "Connect Spotify", "Logout"];
@@ -34,20 +37,19 @@ const logout = async () => {
   }
 };
 
-
 const handleSpotifyConnect = () => {
   const authorizationEndpoint = "https://accounts.spotify.com/authorize";
   const queryParams = new URLSearchParams({
     client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
     redirect_uri: "http://localhost:3000/dashboard",
-    scope: "user-read-private user-read-email user-top-read user-library-read playlist-read-private",
+    scope:
+      "user-read-private user-read-email user-top-read user-library-read playlist-read-private",
     response_type: "code",
   });
 
   const authorizationURL = `${authorizationEndpoint}?${queryParams.toString()}`;
   window.location.href = authorizationURL;
 };
-
 
 function ResponsiveAppBar() {
   const navigate = useNavigate();
@@ -112,7 +114,7 @@ function ResponsiveAppBar() {
             variant="h6"
             noWrap
             component="a"
-            href="#app-bar-with-responsive-menu"
+            href="/dashboard"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
