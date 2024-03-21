@@ -4,6 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { debounce } from "../utility/debounce";
 import axios from "axios";
 import { useStyles } from "../styles/searchBar";
+import SearchCard from "./SearchCard";
 
 const Searchbar = () => {
   const classes = useStyles();
@@ -13,7 +14,6 @@ const Searchbar = () => {
 
   const debouncedSearch = debounce(async (query) => {
     setIsLoading(true);
-    console.log("Submitted");
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_LOCAL}/searchUser`,
@@ -42,7 +42,10 @@ const Searchbar = () => {
 
   return (
     <div className={classes.container}>
-      <form onSubmit={(e) => e.preventDefault()} className={classes.searchContainer}>
+      <form
+        onSubmit={(e) => e.preventDefault()}
+        className={classes.searchContainer}
+      >
         <TextField
           className={classes.searchInput}
           id="search-bar"
@@ -56,13 +59,12 @@ const Searchbar = () => {
           <SearchIcon className={classes.searchIcon} />
         </IconButton>
       </form>
-      {isLoading ? <CircularProgress color="success" className={classes.loading} /> 
-      : (
+      {isLoading ? (
+        <CircularProgress color="success" className={classes.loading} />
+      ) : (
         <div className={classes.resultsContainer}>
           {results.map((user) => (
-            <div key={user.user_name} className={classes.resultItem}>
-              {user.user_name}
-            </div>
+            <SearchCard user={user} key={user.user_id} />
           ))}
         </div>
       )}
