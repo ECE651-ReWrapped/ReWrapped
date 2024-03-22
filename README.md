@@ -1,6 +1,6 @@
-# Getting Started with Rewrapped: 
+# Getting Started with Rewrapped:
 
-Clone the code with your personal access token and run the following commands to get startd.
+Clone the code with your personal access token and run the following commands to get started.
 
 ## Available Scripts
 
@@ -9,6 +9,17 @@ In the project directory, you can run:
 ### `yarn`
 
 To install all the relevant packages with correct version, use yarn alone as i would have locked all the package versions in yarn lock. Dont use npm or pnpm.
+
+### .env
+
+In order to properly setup the frontend repo to work with the backend repo please have the following information in your .env file within the ReWrapped source directory
+
+```
+REACT_APP_BUILD_TYPE=LOCAL
+REACT_APP_API_LOCAL=YOUR_SERVER_URL
+REACT_APP_SPOTIFY_CLIENT_ID="Spotify_Client_String"
+REACT_APP_SPOTIFY_CLIENT_SECRET="Spotify_Client_Secret"
+```
 
 ### `yarn start`
 
