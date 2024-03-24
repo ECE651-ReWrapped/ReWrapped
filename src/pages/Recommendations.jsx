@@ -6,6 +6,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import IconButton from '@mui/material/IconButton';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const staticRecommendationsData = [
     {
@@ -31,6 +32,8 @@ const staticRecommendationsData = [
 ];
 
 const Recommendations = () => {
+  const topArtistSeeds = useSelector(state => state.spotify.seed_top_artists);  
+  const topTrackSeeds = useSelector(state => state.spotify.seed_top_tracks);  
   const [ currIndex, setCurrIndex ] = useState(0);
 
   const handleNextCard = () => {

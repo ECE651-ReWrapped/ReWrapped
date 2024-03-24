@@ -1,9 +1,11 @@
 import { Avatar, Typography, Grid } from "@mui/material";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { spotifyActions } from "../slices/user/access-token-slice";
 
 const ProfileBar = () => {
+    const dispatch = useDispatch();
     const [spotifyUserData, setSpotifyUserData] = useState();
     const accessToken = useSelector(state => state.spotify.accessToken);
     
@@ -16,12 +18,13 @@ const ProfileBar = () => {
                     },
                 });
                 setSpotifyUserData(res.data);
+                dispatch(spotifyActions.setUserId(res.data.id));
             } catch (err) {
                 console.error("Error fetching data: ", err);
             }
         };
         getApiData();
-    }, [accessToken]);
+    }, [accessToken, dispatch]);
 
     if (!spotifyUserData) {
         return null;
