@@ -20,7 +20,7 @@ import {
   exchangeSpotifyToken,
 } from "../utility/spotifyAuth";
 
-const pages = ["Create Playlist"];
+const pages = ["Create Playlist", "Recommendations"];
 const settings = ["Profile", "Connect Spotify", "Logout"];
 
 const logout = async () => {
@@ -76,6 +76,9 @@ function ResponsiveAppBar() {
     switch (clicked) {
       case "Create Playlist":
         navigate("/createPlaylist");
+        break;
+      case "Recommendations":
+        navigate('/recommendations');
         break;
       default:
         console.log("No actions", clicked);
