@@ -9,6 +9,7 @@ import ForgotPassword from "./pages/ForgotPassword";
 import UserProfile from "./pages/Profile";
 import SetNewPassword from "./pages/SetNewPassword";
 import CreatePlaylist from "./pages/CreatePlaylist";
+import Recommendations from "./pages/Recommendations"
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,14 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+  {
+    path: "/recommendations",
+    element: (
+      <ProtectedRoute>
+        <Recommendations />
+      </ProtectedRoute>
+    )
+  }
 ]);
 
 const App = () => {
