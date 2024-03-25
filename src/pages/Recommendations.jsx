@@ -8,6 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from "axios";
+import { CircularProgress } from '@mui/material';
 
 const staticRecommendationsData = [
     {
@@ -57,6 +58,7 @@ const Recommendations = () => {
     const topTrackSeeds = useSelector(state => state.spotify.seed_top_tracks);
     const accessToken = useSelector(state => state.spotify.accessToken);
     const [currIndex, setCurrIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     const [recommendationData, setRecommendationData] = useState([]);
 
     useEffect(() => {
@@ -73,13 +75,14 @@ const Recommendations = () => {
                     },
                 });
                 setRecommendationData(res.data.tracks);
+                setIsLoading(false);
 
             } catch (err) {
                 console.error("Failed to fetch data from api: ", err);
             }
         };
         getApiData();
-    }, [accessToken, topTrackSeeds, topArtistSeeds]);
+    }, []);
 
     const handleNextCard = () => {
         setCurrIndex((prevState) => {
@@ -102,7 +105,8 @@ const Recommendations = () => {
     return (
         <>
             <ResponsiveAppBar />
-            <Box sx={{ gap: 2, display: "flex", flexDirection: "column" }}>
+            {isLoading && <CircularProgress sx={{ marginLeft: '50%', marginTop: "20px" }} />}
+            {!isLoading && <Box sx={{ gap: 2, display: "flex", flexDirection: "column" }}>
                 <RecommendationCard
                     nameOfSong={recommendationData.length !== 0 ? recommendationData[currIndex].name : staticRecommendationsData[currIndex].nameOfSong}
                     nameOfArtist={recommendationData.length !== 0 ? recommendationData[currIndex].artists.name : staticRecommendationsData[currIndex].nameOfArtist}
@@ -121,7 +125,7 @@ const Recommendations = () => {
                         </IconButton>
                     </Tooltip>
                 </Box>
-            </Box>
+            </Box>}
         </>
     );
 };

@@ -9,8 +9,15 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { Tooltip, Box } from '@mui/material';
+import { useState } from 'react';
+import PlaylistDialog from "./PlaylistDialog";
 
-export default function RecommendationCard(props) {
+const RecommendationCard = (props) => {
+  const [addToPlaylist, setAddToPlaylist] = useState(false);
+
+  const handleAddToPlaylist = () => {
+    setAddToPlaylist(true);
+  };
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "3%" }}>
@@ -44,13 +51,16 @@ export default function RecommendationCard(props) {
             </IconButton>
           </Tooltip>
           <Tooltip title="Add to your playlist!">
-            <IconButton aria-label="add playlist" >
+            <IconButton onClick={handleAddToPlaylist} aria-label="add playlist" >
               <PlaylistAddIcon />
             </IconButton>
           </Tooltip>
+          {addToPlaylist && <PlaylistDialog handleCloseList={setAddToPlaylist} />}
         </CardActions>
       </Card>
     </Box>
   );
 }
+
+export default RecommendationCard;
 
