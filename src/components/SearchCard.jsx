@@ -1,7 +1,15 @@
 import { Card, Button, Box } from "@mui/material";
 import axios from "axios";
+import { useState } from "react";
+import PlaylistDialog from "./PlaylistDialog";
 
 const SearchCard = ({ user }) => {
+  const [addToPlaylist, setAddToPlaylist] = useState(false);
+
+  const handleAddToPlaylist = () => {
+    setAddToPlaylist(true);
+  };
+
   const followUser = async () => {
     try {
       const res = await axios.post(`${process.env.REACT_APP_API_LOCAL}/`);
@@ -32,8 +40,13 @@ const SearchCard = ({ user }) => {
       {user.user_name}
       <Box>
         {/* //If user is followed render the unfollow button, else render follow button */}
-        <Button>Follow</Button>
-        <Button>Add to Playlist</Button>
+        { !addToPlaylist && 
+          <>
+            <Button>Follow</Button>
+            <Button onClick={handleAddToPlaylist}>Add to Playlist</Button>
+          </>
+        }
+        {addToPlaylist && <PlaylistDialog handleCloseList={setAddToPlaylist}/> }
       </Box>
     </Card>
   );
