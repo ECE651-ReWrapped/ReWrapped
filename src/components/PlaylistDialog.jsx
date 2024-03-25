@@ -7,7 +7,7 @@ const PlaylistDialog = ({ handleCloseList }) => {
 
     return (
         <Dialog open={true} onClose={() => handleCloseList(false)}>
-            <DialogTitle>Add a friend to your playlist</DialogTitle>
+            <DialogTitle>Add a song to your playlist</DialogTitle>
             <DialogContent>
                 <List>
                     {playlists.map((playlist, index) => (
