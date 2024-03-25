@@ -2,7 +2,7 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import ReactApexChart from "react-apexcharts";
 
-function ListeningTrendsGraph({ userData }) {
+function ListeningTrendsGraph({ userId }) {
     const options = {
         chart: {
             id: 'listening-trends-chart',
