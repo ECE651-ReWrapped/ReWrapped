@@ -31,12 +31,16 @@ const UserPlaylists = () => {
 
   return (
     <>
-    {userPlaylists? <Grid container spacing={2} >
+    {userPlaylists ? <Grid container spacing={2} >
       {userPlaylists.map((playlist, index) => (
         <Grid item key={index} xs={12} sm={6} md={4} >
           <ListItem className={classes.listItem} style={{width: '300px'}}>
             <ListItemAvatar sx={{padding: 1}}>
-              <Avatar alt={playlist.name} src={playlist.images[0].url} className={classes.avatar} />
+              <Avatar
+                alt={playlist.name}
+                src={playlist.images && playlist.images.length > 0 ? playlist.images[0].url : 'defaultImageURL'}
+                className={classes.avatar}
+              />
             </ListItemAvatar>
             <Grid item className={classes.textContainer}>
               <ListItemText
