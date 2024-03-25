@@ -35,7 +35,7 @@ const Login = () => {
       );
 
       if (res.status === 200) {
-        window.location.href = 'http://localhost:6001/spotifyLogin';
+        window.location.href = 'http://localhost:6001/loginSpotify';
       } else {
         // Handle non-200 HTTP status codes if needed
         console.error("Signup failed with status:", res.status);
