@@ -9,20 +9,27 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { Tooltip, Box } from '@mui/material';
+import { useState } from 'react';
+import PlaylistDialog from "./PlaylistDialog";
 
-export default function RecommendationCard(props) {
-  
+const RecommendationCard = (props) => {
+  const [addToPlaylist, setAddToPlaylist] = useState(false);
+
+  const handleAddToPlaylist = () => {
+    setAddToPlaylist(true);
+  };
+
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: "3%" }}>
-        <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345 }}>
         <CardMedia
-            component="img"
-            height="194"
-            image={props.songImage}
-            alt="Song image not available"
+          component="img"
+          height="194"
+          image={props.songImage}
+          alt="Song image not available"
         />
         <CardContent>
-            <Typography component="div" variant="h5">
+          <Typography component="div" variant="h5">
             {props.nameOfSong}
           </Typography>
           <Typography variant="subtitle1" color="text.secondary" component="div">
@@ -30,27 +37,30 @@ export default function RecommendationCard(props) {
           </Typography>
         </CardContent>
         <CardActions sx={{
-            display: "flex",
-            justifyContent: 'space-evenly'
+          display: "flex",
+          justifyContent: 'space-evenly'
         }}>
-            <Tooltip title="Like this song!">
-                <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Share with friends!">
-                <IconButton aria-label="share">
-                <ShareIcon />
-                </IconButton>
-            </Tooltip>
-            <Tooltip title="Add to your playlist!">
-                <IconButton aria-label="add playlist" >
-                <PlaylistAddIcon />
-                </IconButton>
-            </Tooltip>
+          <Tooltip title="Like this song!">
+            <IconButton aria-label="add to favorites">
+              <FavoriteIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Share with friends!">
+            <IconButton aria-label="share">
+              <ShareIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Add to your playlist!">
+            <IconButton onClick={handleAddToPlaylist} aria-label="add playlist" >
+              <PlaylistAddIcon />
+            </IconButton>
+          </Tooltip>
+          {addToPlaylist && <PlaylistDialog handleCloseList={setAddToPlaylist} />}
         </CardActions>
-        </Card>
+      </Card>
     </Box>
   );
 }
+
+export default RecommendationCard;
 

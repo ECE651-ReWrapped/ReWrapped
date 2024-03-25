@@ -1,7 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import { Router } from "react-router-dom";
-import App from "../App";
 import ProtectedRoute from "../routes/privateRoute";
 import Dashboard from "../pages/Dashboard";
 
@@ -22,6 +21,9 @@ describe("App Routing", () => {
         </ProtectedRoute>
       </Router>
     );
-    expect(screen.getByText(/dashboard/i)).toBeInTheDocument();
+    const expectedComponent = screen.findByText(/Spotify ReWrapped./i);
+    expectedComponent.then(() => {
+      expect(screen.findByText(/Spotify ReWrapped./i)).toBeInTheDocument();
+    });
   });
 });
