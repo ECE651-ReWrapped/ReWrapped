@@ -68,8 +68,8 @@ const Recommendations = () => {
                     },
                     params: {
                         limit: 8, // number of recommendations displayed to user
-                        seed_tracks: `${topTrackSeeds[1]}, ${topTrackSeeds[2]}`, // using only two seeds
-                        seed_artists: `${topArtistSeeds[1]}, ${topArtistSeeds[2]}` // using only two seeds
+                        seed_tracks: topTrackSeeds[1], // using only one seed
+                        seed_artists: topArtistSeeds[1] // using only one seed
                     },
                 });
                 setRecommendationData(res.data.tracks);
