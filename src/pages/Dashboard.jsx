@@ -164,7 +164,7 @@ function Dashboard() {
                 data={"4"}
                 subtitle={"All Time 4"}
               />
-              <TopGenresGraph userData={sampleListeningData} />
+              <TopGenresGraph userId={name} />
             </Box>
           </Box>
         </Grid>
