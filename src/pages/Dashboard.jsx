@@ -87,7 +87,7 @@ function Dashboard() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_LOCAL}/recently-played/${name}`
+          `${process.env.REACT_APP_API_LOCAL}/api/recently-played/${name}`
         );
         const jsonData = await response.json();
         setData(jsonData);
@@ -103,7 +103,7 @@ function Dashboard() {
     const fetchRcData = async () => {
       try {
         const response = await fetch(
-          `${process.env.REACT_APP_API_LOCAL}/recommended/${name}`
+          `${process.env.REACT_APP_API_LOCAL}/api/recommended/${name}`
         );
         const jsonData = await response.json();
         setRcData(jsonData);
