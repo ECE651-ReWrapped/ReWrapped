@@ -2,15 +2,17 @@ import { useState, useEffect } from "react";
 import { Grid, ListItem, ListItemText, ListItemAvatar, Avatar, Typography } from '@mui/material';
 import axios from "axios";
 import { useStyles } from "../styles/profilePageData";
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { spotifyActions } from "../slices/user/access-token-slice";
 
 const TopTracks = () => {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [userTopTracks, setUserTopTracks] = useState([]);
   const accessToken = useSelector(state => state.spotify.accessToken);
 
   useEffect(() => {
+    var topTracksSeeds = [];
     const getApiData = async () => {
       try {
         const res = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
@@ -23,12 +25,19 @@ const TopTracks = () => {
           },
         });
         setUserTopTracks(res.data.items);
+
+        // update tracks in global state
+        res.data.items.forEach((item) => {
+          topTracksSeeds.push(item.uri.split(':')[2]);
+        });
+        dispatch(spotifyActions.setTopTracksSeeds(topTracksSeeds));
+
       } catch (err) {
         console.error("Failed to fetch data: ", err);
       }
     };
     getApiData();
-  }, [accessToken]);
+  }, [accessToken, dispatch]);
 
   return (
     <>

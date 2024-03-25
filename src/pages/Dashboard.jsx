@@ -9,7 +9,6 @@ import TopGenresGraph from "../components/topGenresGraph";
 import StatsCard from "../components/statsCard";
 import TopSongCard from "../components/TopSongCard"
 // Supports weights 100-900
-import '@fontsource-variable/work-sans';
 // todo: temp data until backend is done
 
 const topSongCardData = {
@@ -125,7 +124,7 @@ function Dashboard() {
 
       <Container maxWidth="lg" style={{ padding: "24px" }}>
         <Grid>
-          <Typography ml={25} mt={10} variant="h3" style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold' }}>
+          <Typography ml={25} mt={10} variant="h3" style={{ fontFamily: "sans-serif", fontWeight: 'bold' }}>
             Spotify ReWrapped.
           </Typography>
           <Typography ml={25} mt={2} mb={5} variant="subtitle1" color="#61758A">
@@ -173,7 +172,7 @@ function Dashboard() {
           <Grid item xs={12}>
             <Typography
               padding="5px"
-              style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', textAlign: 'left' }}
+              style={{ fontFamily: "sans-serif", fontWeight: 'bold', textAlign: 'left' }}
               variant="h5"
               gutterBottom
             >
@@ -184,7 +183,7 @@ function Dashboard() {
           <Grid item xs={12}>
             <Typography
               padding="5px"
-              style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', textAlign: 'left' }}
+              style={{ fontFamily: "sans-serif", fontWeight: 'bold', textAlign: 'left' }}
               variant="h5"
               gutterBottom
             >

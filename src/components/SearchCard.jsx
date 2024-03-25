@@ -1,6 +1,5 @@
 import { Card, Button, Box } from "@mui/material";
 import axios from "axios";
-import PlaylistDialog from "./PlaylistDialog";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
@@ -9,12 +8,6 @@ import { useEffect, useState } from 'react';
 const notify = (message) => toast.error(message);
 
 const SearchCard = ({ user }) => {
-  const [addToPlaylist, setAddToPlaylist] = useState(false);
-
-  const handleAddToPlaylist = () => {
-    setAddToPlaylist(true);
-  };
-
   const [isFollowed, setIsFollowed] = useState(false);
 
   useEffect(() => {
@@ -81,15 +74,10 @@ const SearchCard = ({ user }) => {
         {user.user_name}
         <Box>
           {/* //If user is followed render the unfollow button, else render follow button */}
-        { !addToPlaylist && 
-          <>
-              <Button onClick={isFollowed ? unfollowUser : followUser}>
+          <Button onClick={isFollowed ? unfollowUser : followUser}>
             {isFollowed ? 'Unfollow' : 'Follow'}
           </Button>
-              <Button onClick={handleAddToPlaylist}>Add to Playlist</Button>
-          </>
-        }
-        {addToPlaylist && <PlaylistDialog handleCloseList={setAddToPlaylist}/> }
+          <Button>Add to Playlist</Button>
         </Box>
       </Card>
     </>
