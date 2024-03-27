@@ -8,6 +8,8 @@ import ListeningTrendsGraph from "../components/listeningTrendsGraph";
 import TopGenresGraph from "../components/topGenresGraph";
 import StatsCard from "../components/statsCard";
 import TopSongCard from "../components/TopSongCard"
+import { useDispatch } from "react-redux";
+import { userDetailsActions } from "../slices/user/user-details-slice";
 // Supports weights 100-900
 // todo: temp data until backend is done
 
@@ -74,8 +76,13 @@ const sampleSongData = [
 const sampleListeningData = [];
 
 function Dashboard() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
+
+  // get user's email from localStorage
+  const currUserEmail = localStorage.getItem('currUserEmail');
+  dispatch(userDetailsActions.setUserEmail(currUserEmail));
 
   const name = queryParams.get("displayName");
 
