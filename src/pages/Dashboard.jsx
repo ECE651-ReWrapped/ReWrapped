@@ -81,7 +81,7 @@ function Dashboard() {
   const queryParams = new URLSearchParams(location.search);
 
   // get user's email from localStorage
-  const currUserEmail = localStorage.getItem('currUserEmail');
+  const currUserEmail = localStorage.getItem('currentUserEmail');
   dispatch(userDetailsActions.setUserEmail(currUserEmail));
 
   const name = queryParams.get("displayName");
