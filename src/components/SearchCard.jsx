@@ -63,18 +63,6 @@ const SearchCard = ({ user }) => {
   // shared playlists handlers
   const handleAddPlaylist = async () => {
     setViewPlaylistDialog(true);
-    try {
-      const res = await axios.post(`${process.env.REACT_APP_API_LOCAL}/followUser`, { 
-        playlist_name: "",
-        createdByEmail: "",
-        sharedWithUsername : ""
-      }, 
-      { 
-        withCredentials: true 
-      });
-    } catch (err) {
-      console.error("Failed to create a new playlist", err);
-    }
   };
 
   return (
