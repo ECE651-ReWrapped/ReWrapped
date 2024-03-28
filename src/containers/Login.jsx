@@ -35,7 +35,7 @@ const Login = () => {
       );
 
       if (res.status === 200) {
-        localStorage.setItem('currentUserEmail', values.email); // to make it persist across browser refresh 
+        sessionStorage.setItem('currentUserEmail', values.email); // to make it persist across browser refresh 
         window.location.href = 'http://localhost:6001/loginSpotify';
       } else {
         // Handle non-200 HTTP status codes if needed
