@@ -1,21 +1,83 @@
 import React from 'react';
-import { Dialog, DialogTitle, DialogContent, ListItemButton, List, ListItemText } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, ListItemButton, List, ListItemText, Button, TextField } from '@mui/material';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useSelector } from "react-redux";
 
-const PlaylistDialog = ({ handleCloseList }) => {
-    // Dummy list of playlist names
-    const playlists = ['Playlist 1', 'Playlist 2', 'Playlist 3', 'Playlist 4', 'Playlist 5'];
+let playlists = [];
+
+const PlaylistDialog = ({ currUser, handleCloseList }) => {
+    const currUserEmail = useSelector(state => state.currentUserDetails.userEmail);
+    const [isPlaylistEmpty, setPlaylistEmpty] = useState(true); // consider no shared playlists until API call sends a list
+    const [enterPlaylist, setEnterPlaylist] = useState(false);
+    const [playlistName, setPlaylistName] = useState("");
+
+    useEffect(() => {
+        const fetchPlaylistsFromDb = async () => {
+            playlists = [];
+            try {
+                const res = await axios.get(`${process.env.REACT_APP_API_LOCAL}/getSharedPlaylists`, {
+                    params: {
+                        createdByUserEmail: currUserEmail,
+                        sharedWithUsername: currUser
+                    },
+                    withCredentials: true,
+                });
+
+                if (res.status === 404) {
+                    // no existing shared playlists
+                    setPlaylistEmpty(true);
+                } else {
+                    setPlaylistEmpty(false);
+                    // display existing playlists
+                    res.data.playlists.forEach((item) => {
+                        playlists.push(item.playlist_name);
+                    })
+                }
+            } catch (err) {
+                console.error("Failed to fetch playlists: ", err);
+            }
+        };
+        fetchPlaylistsFromDb();
+    }, [currUserEmail, isPlaylistEmpty]);
+
+    const handleCreatePlaylist = () => {
+        setEnterPlaylist(true);
+    }
+
+    const onDone = async () => {
+        setEnterPlaylist(false);
+        setPlaylistEmpty(false);
+        handleCloseList(false); // close dialog box altogether
+
+        try {
+            const res = await axios.post(
+                `${process.env.REACT_APP_API_LOCAL}/createNewSharedPlaylist`,
+                {
+                    playlist_name: playlistName,
+                    createdByEmail: currUserEmail,
+                    sharedWithUsername: currUser
+                }
+            );
+        } catch (err) {
+            console.error("Failed to create a new playlist: ", err);
+        }
+    };
 
     return (
         <Dialog open={true} onClose={() => handleCloseList(false)}>
-            <DialogTitle>Add this song to your playlist</DialogTitle>
+            {!isPlaylistEmpty && !enterPlaylist && <DialogTitle>Your shared playlists</DialogTitle>}
             <DialogContent>
-                <List>
+                {!isPlaylistEmpty && !enterPlaylist && <List>
                     {playlists.map((playlist, index) => (
                         <ListItemButton onClick={() => handleCloseList(false)} key={index}>
                             <ListItemText primary={playlist} />
                         </ListItemButton>
                     ))}
-                </List>
+                </List>}
+                {enterPlaylist && <TextField value={playlistName} onChange={(e) => setPlaylistName(e.target.value)} id="outlined-basic" label="Outlined" variant="outlined" />}
+                {enterPlaylist && <Button onClick={onDone}>Done</Button>}
+                {!enterPlaylist && <Button onClick={handleCreatePlaylist}>Create a new Playlist</Button>}
             </DialogContent>
         </Dialog>
     );
