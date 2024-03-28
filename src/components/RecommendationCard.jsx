@@ -10,13 +10,13 @@ import ShareIcon from '@mui/icons-material/Share';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import { Tooltip, Box } from '@mui/material';
 import { useState } from 'react';
-import PlaylistDialog from "./PlaylistDialog";
+import SongToPlaylistDialog from './SongToPlaylistDialog';
 
 const RecommendationCard = (props) => {
-  const [addToPlaylist, setAddToPlaylist] = useState(false);
+  const [addSongToPlaylist, setAddSongToPlaylist] = useState(false);
 
   const handleAddToPlaylist = () => {
-    setAddToPlaylist(true);
+    setAddSongToPlaylist(true);
   };
 
   return (
@@ -55,7 +55,7 @@ const RecommendationCard = (props) => {
               <PlaylistAddIcon />
             </IconButton>
           </Tooltip>
-          {addToPlaylist && <PlaylistDialog handleCloseList={setAddToPlaylist} />}
+          {addSongToPlaylist && <SongToPlaylistDialog handleCloseDialog={setAddSongToPlaylist} />}
         </CardActions>
       </Card>
     </Box>
