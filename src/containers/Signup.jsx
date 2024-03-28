@@ -6,9 +6,13 @@ import { validationSchema } from "../utility/passwordValidator";
 // import { useAxios } from "../hooks/useAxios";
 // import { passwordValidation } from "../utility/passwordValidator";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useDispatch } from "react-redux";
+import { userDetailsActions } from "../slices/user/user-details-slice";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const createUser = async (values) => {
     try {
       const res = await axios.post(
@@ -29,6 +33,8 @@ const Signup = () => {
       console.log(res);
 
       if (res.status === 200) {
+        // store current user's email as global state
+        dispatch(userDetailsActions.setUserEmail(values.email));
         navigate("/dashboard");
       } else {
         // Handle non-200 HTTP status codes if needed

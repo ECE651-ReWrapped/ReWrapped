@@ -77,7 +77,7 @@ const SearchCard = ({ user }) => {
           <Button onClick={isFollowed ? unfollowUser : followUser}>
             {isFollowed ? 'Unfollow' : 'Follow'}
           </Button>
-          <Button>Add to Playlist</Button>
+          <Button>Create Playlist</Button>
         </Box>
       </Card>
     </>
