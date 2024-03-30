@@ -55,7 +55,7 @@ const RecommendationCard = (props) => {
               <PlaylistAddIcon />
             </IconButton>
           </Tooltip>
-          {addSongToPlaylist && <SongToPlaylistDialog handleCloseDialog={setAddSongToPlaylist} />}
+          {addSongToPlaylist && <SongToPlaylistDialog songName={props.nameOfSong} songArtist={props.nameOfArtist} handleCloseDialog={setAddSongToPlaylist} />}
         </CardActions>
       </Card>
     </Box>

@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, DialogContent, ListItemButton, List, ListItemText,
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 let playlists = [];
 
@@ -11,6 +12,7 @@ const PlaylistDialog = ({ currUser, handleCloseList }) => {
     const [isPlaylistEmpty, setPlaylistEmpty] = useState(true); // consider no shared playlists until API call sends a list
     const [enterPlaylist, setEnterPlaylist] = useState(false);
     const [playlistName, setPlaylistName] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPlaylistsFromDb = async () => {
@@ -64,13 +66,18 @@ const PlaylistDialog = ({ currUser, handleCloseList }) => {
         }
     };
 
+    // display playlist tracks in the selected playlist to user
+    const handleGetPlaylistTracks = async (selectedPlaylist) => {
+        navigate(`/my-playlists/${selectedPlaylist}`);
+    };
+
     return (
         <Dialog open={true} onClose={() => handleCloseList(false)}>
             {!isPlaylistEmpty && !enterPlaylist && <DialogTitle>Your shared playlists</DialogTitle>}
             <DialogContent>
                 {!isPlaylistEmpty && !enterPlaylist && <List>
                     {playlists.map((playlist, index) => (
-                        <ListItemButton onClick={() => handleCloseList(false)} key={index}>
+                        <ListItemButton onClick={() => { handleGetPlaylistTracks(playlist); }} key={index}>
                             <ListItemText primary={playlist} />
                         </ListItemButton>
                     ))}
