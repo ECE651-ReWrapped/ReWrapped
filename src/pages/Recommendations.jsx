@@ -109,7 +109,7 @@ const Recommendations = () => {
             {!isLoading && <Box sx={{ gap: 2, display: "flex", flexDirection: "column" }}>
                 <RecommendationCard
                     nameOfSong={recommendationData.length !== 0 ? recommendationData[currIndex].name : staticRecommendationsData[currIndex].nameOfSong}
-                    nameOfArtist={recommendationData.length !== 0 ? recommendationData[currIndex].artists.name : staticRecommendationsData[currIndex].nameOfArtist}
+                    nameOfArtist={recommendationData.length !== 0 ? recommendationData[currIndex].artists[0].name : staticRecommendationsData[currIndex].nameOfArtist}
                     songImage={recommendationData.length !== 0 ? recommendationData[currIndex].album.images[0].url : staticRecommendationsData[currIndex].songImage}
                 />
 

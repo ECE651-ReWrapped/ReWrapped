@@ -3,12 +3,14 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
+import PlaylistDialog from "./PlaylistDialog";
 
 // Call this function to display a toast with the error message
 const notify = (message) => toast.error(message);
 
 const SearchCard = ({ user }) => {
   const [isFollowed, setIsFollowed] = useState(false);
+  const [ viewPlaylistDialog, setViewPlaylistDialog ] = useState(false);
 
   useEffect(() => {
     const checkFollowStatus = async () => {
@@ -58,6 +60,11 @@ const SearchCard = ({ user }) => {
     }
   };
 
+  // shared playlists handlers
+  const handleAddPlaylist = async () => {
+    setViewPlaylistDialog(true);
+  };
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
@@ -77,9 +84,10 @@ const SearchCard = ({ user }) => {
           <Button onClick={isFollowed ? unfollowUser : followUser}>
             {isFollowed ? 'Unfollow' : 'Follow'}
           </Button>
-          <Button>Add to Playlist</Button>
+          <Button onClick={handleAddPlaylist}>Add Playlist</Button>
         </Box>
       </Card>
+      {viewPlaylistDialog && <PlaylistDialog currUser={user.user_name} handleCloseList={setViewPlaylistDialog} />}
     </>
   );
 };
