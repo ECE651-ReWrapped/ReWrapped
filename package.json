@@ -45,7 +45,7 @@
     "lint:fix": "eslint --fix src",
     "precommit": "lint-staged",
     "prepare": "husky",
-    "coverage": "react-scripts test --coverage",
+    "coverage": "react-scripts test --coverage --watchAll",
     "test-sonar": "react-scripts test --watchAll=false --coverage --testResultsProcessor jest-sonar-reporter",
     "sonar": "node sonarqube-scanner.js"
   },
