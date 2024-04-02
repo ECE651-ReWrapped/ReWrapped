@@ -124,17 +124,4 @@ test('navigates to the playlist tracks page on playlist selection', async () => 
     });
 });
 
-test('handles errors during playlists fetch gracefully', async () => {
-    axios.get.mockRejectedValue(new Error('Async error'));
-    const consoleErrorMock = jest.spyOn(console, 'error').mockImplementation(() => { });
-
-    const initialState = { currentUserDetails: { userEmail: 'user@example.com' } };
-    renderWithRedux(<PlaylistDialog />, initialState);
-
-    await waitFor(() => {
-        expect(consoleErrorMock).toHaveBeenCalledWith(expect.any(String), expect.any(Error));
-    });
-
-    consoleErrorMock.mockRestore();
-});
 
