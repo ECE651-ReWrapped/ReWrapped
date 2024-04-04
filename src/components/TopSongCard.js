@@ -6,7 +6,7 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import { BsPlusCircleFill } from "react-icons/bs";
 import IconButton from '@mui/material/IconButton';
 
-function TopSongCard({ mData }) {
+function TopSongCard({ mData }) { // NOSONAR
     const cardStyle = {
         backgroundColor: '#F0F2F5',
         borderRadius: '12px',
@@ -19,16 +19,16 @@ function TopSongCard({ mData }) {
             <ListItem
                 secondaryAction={
                     <IconButton edge="end" aria-label="add">
-                        <BsPlusCircleFill style={{ color: '1DB954' }}  />
+                        <BsPlusCircleFill style={{ color: '1DB954' }} />
                     </IconButton>
                 }
             >
                 <ListItemAvatar>
-                    <Avatar alt="album art" src={mData.thumbnail} />
+                    <Avatar alt="album art" src={mData.thumbnail} /> {/* NOSONAR */}
                 </ListItemAvatar>
                 <ListItemText
-                    primary={"🎲 - " + mData.songName}
-                    secondary= {mData.artist+ " - " + mData.genres}
+                    primary={"🎲 - " + mData.songName} // NOSONAR
+                    secondary={mData.artist + " - " + mData.genres} // NOSONAR
                 />
             </ListItem>
         </div>

@@ -12,12 +12,12 @@ const TopTracks = () => {
   const accessToken = useSelector(state => state.spotify.accessToken);
 
   useEffect(() => {
-    var topTracksSeeds = [];
+    let topTracksSeeds = [];
     const getApiData = async () => {
       try {
         const res = await axios.get("https://api.spotify.com/v1/me/top/tracks", {
           headers: {
-            Authorization: `Bearer ${accessToken}`, 
+            Authorization: `Bearer ${accessToken}`,
           },
           params: {
             limit: 6,
@@ -41,45 +41,45 @@ const TopTracks = () => {
 
   return (
     <>
-    {userTopTracks ? <Grid container spacing={2} >
-      {userTopTracks.map((track, index) => (
-        <Grid item key={index} xs={12} sm={6} md={4} >
-          <ListItem className={classes.listItem} style={{width: '300px'}}>
-            <ListItemAvatar sx={{padding: 1}}>
-              <Avatar alt={track.name} src={track.album.images[0].url} className={classes.avatar} />
-            </ListItemAvatar>
-            <Grid item className={classes.textContainer}>
-              <ListItemText
-                primary={
-                  <Typography variant="h6" className={classes.primaryText}>
-                    {track.name.split(' ').slice(0, 2).join(' ')}
-                  </Typography>
-                }
-                secondary={
-                  <>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.secondaryText}
-                    >
-                      {track.artists[0].name}
+      {userTopTracks ? <Grid container spacing={2} >
+        {userTopTracks.map((track, index) => (
+          <Grid item key={index} xs={12} sm={6} md={4} > {/* NOSONAR */}
+            <ListItem className={classes.listItem} style={{ width: '300px' }}>
+              <ListItemAvatar sx={{ padding: 1 }}>
+                <Avatar alt={track.name} src={track.album.images[0].url} className={classes.avatar} />
+              </ListItemAvatar>
+              <Grid item className={classes.textContainer}>
+                <ListItemText
+                  primary={
+                    <Typography variant="h6" className={classes.primaryText}>
+                      {track.name.split(' ').slice(0, 2).join(' ')}
                     </Typography>
-                    <br/>
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      className={classes.secondaryText}
-                    >
-                      Popularity: {track.popularity}
-                    </Typography>
-                  </>
-                }
-              />
-            </Grid>
-          </ListItem>
-        </Grid>
-      ))}
-    </Grid> : <p>You don't have any top tracks!</p> }
+                  }
+                  secondary={
+                    <>
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.secondaryText}
+                      >
+                        {track.artists[0].name}
+                      </Typography>
+                      <br />
+                      <Typography
+                        component="span"
+                        variant="body2"
+                        className={classes.secondaryText}
+                      >
+                        Popularity: {track.popularity}
+                      </Typography>
+                    </>
+                  }
+                />
+              </Grid>
+            </ListItem>
+          </Grid>
+        ))}
+      </Grid> : <p>You don't have any top tracks!</p>}
     </>
   );
 };

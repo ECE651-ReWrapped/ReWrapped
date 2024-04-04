@@ -1,14 +1,12 @@
-import React from 'react'
 import ResponsiveAppBar from '../components/appBar';
 import RecommendationCard from '../components/RecommendationCard';
-import { Tooltip, Box } from '@mui/material';
+import { Tooltip, Box, CircularProgress } from '@mui/material';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import IconButton from '@mui/material/IconButton';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from "axios";
-import { CircularProgress } from '@mui/material';
 
 const staticRecommendationsData = [
     {

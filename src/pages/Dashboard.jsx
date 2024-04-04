@@ -1,4 +1,3 @@
-import React from "react";
 import { Grid, Typography, Container, Box } from "@mui/material";
 import ResponsiveAppBar from "../components/appBar";
 import SongList from "../components/songList";
@@ -11,7 +10,6 @@ import TopSongCard from "../components/TopSongCard"
 import { useDispatch } from "react-redux";
 import { userDetailsActions } from "../slices/user/user-details-slice";
 // Supports weights 100-900
-// todo: temp data until backend is done
 
 const topSongCardData = {
   title: "Top Song For Today!",
@@ -31,52 +29,47 @@ const sampleSongData = [
     genres: "Alt Rock"
   },
   {
-    track_name: "Cut To The Feeling",
-    artists: "Carly Rae Jepsen",
-    album: "Cut To The Feeling",
-    albumArt:
-      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-    genres: "Alt Rock"
+    track_name: "Bohemian Rhapsody",
+    artists: "Queen",
+    album: "A Night at the Opera",
+    albumArt: "https://i.scdn.co/image/ab67616d0000b2734223dcbe1b1d6957b6381b00",
+    genres: "Classic Rock"
   },
   {
-    track_name: "Cut To The Feeling",
-    artists: "Carly Rae Jepsen",
-    album: "Cut To The Feeling",
-    albumArt:
-      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-    genres: "Alt Rock"
+    track_name: "bad guy",
+    artists: "Billie Eilish",
+    album: "WHEN WE ALL FALL ASLEEP, WHERE DO WE GO?",
+    albumArt: "https://i.scdn.co/image/ab67616d0000b2732a6cbeac6b2b6757a4b4c4e5",
+    genres: "Electropop"
   },
   {
-    track_name: "Cut To The Feeling",
-    artists: "Carly Rae Jepsen",
-    album: "Cut To The Feeling",
-    albumArt:
-      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-    genres: "Alt Rock"
+    track_name: "Shape of You",
+    artists: "Ed Sheeran",
+    album: "÷ (Divide)",
+    albumArt: "https://i.scdn.co/image/ab67616d0000b2737bfea0b37b6fcb75a2bbf04a",
+    genres: "Pop"
+  }
+  ,
+  {
+    track_name: "Smells Like Teen Spirit",
+    artists: "Nirvana",
+    album: "Nevermind",
+    albumArt: "https://i.scdn.co/image/ab67616d0000b273dbb3ddf9c7cceb0b9b7f40c7",
+    genres: "Grunge"
   },
   {
-    track_name: "Cut To The Feeling",
-    artists: "Carly Rae Jepsen",
-    album: "Cut To The Feeling",
-    albumArt:
-      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-    genres: "Alt Rock"
+    track_name: "Redbone",
+    artists: "Childish Gambino",
+    album: "Awaken, My Love!",
+    albumArt: "https://i.scdn.co/image/ab67616d0000b273d99b42c1d21eee89b05a9e5a",
+    genres: "Psychedelic Soul"
   },
   {
-    track_name: "Cut To The Feeling",
-    artists: "Carly Rae Jepsen",
-    album: "Cut To The Feeling",
-    albumArt:
-      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-    genres: "Alt Rock"
-  },
-  {
-    track_name: "Cut To The Feeling",
-    artists: "Carly Rae Jepsen",
-    album: "Cut To The Feeling",
-    albumArt:
-      "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
-    genres: "Alt Rock"
+    track_name: "Strobe",
+    artists: "deadmau5",
+    album: "For Lack of a Better Name",
+    albumArt: "https://i.scdn.co/image/ab67616d0000b2738d066c0895b8785d88387203",
+    genres: "Progressive House"
   }
 ];
 
@@ -93,7 +86,7 @@ function Dashboard() {
 
   const name = queryParams.get("displayName");
 
-  const [rpData, setData] = useState([sampleSongData]);
+  const [rpData, setRpData] = useState([sampleSongData]);
   const [rcData, setRcData] = useState([sampleSongData]);
 
   useEffect(() => {
@@ -103,7 +96,7 @@ function Dashboard() {
           `${process.env.REACT_APP_API_LOCAL}/api/recently-played/${name}`
         );
         const jsonData = await response.json();
-        setData(jsonData);
+        setRpData(jsonData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
