@@ -3,7 +3,7 @@ import { Typography, Box, Paper } from '@mui/material';
 
 function StatsCard({ title, value, subtitle }) {
     return (
-        <Paper elevation={2} style={{
+        <Paper data-testid="stats-card" elevation={2} style={{
             width: '200px',
             height: '100px',
             display: 'flex', 
