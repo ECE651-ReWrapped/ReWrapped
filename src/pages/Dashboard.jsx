@@ -26,6 +26,7 @@ const sampleSongData = [
     album: "Cut To The Feeling",
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+    genres: "Alt Rock"
   },
   {
     track_name: "Cut To The Feeling",
@@ -33,6 +34,7 @@ const sampleSongData = [
     album: "Cut To The Feeling",
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+    genres: "Alt Rock"
   },
   {
     track_name: "Cut To The Feeling",
@@ -40,6 +42,7 @@ const sampleSongData = [
     album: "Cut To The Feeling",
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+    genres: "Alt Rock"
   },
   {
     track_name: "Cut To The Feeling",
@@ -47,6 +50,7 @@ const sampleSongData = [
     album: "Cut To The Feeling",
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+    genres: "Alt Rock"
   },
   {
     track_name: "Cut To The Feeling",
@@ -54,6 +58,7 @@ const sampleSongData = [
     album: "Cut To The Feeling",
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+    genres: "Alt Rock"
   },
   {
     track_name: "Cut To The Feeling",
@@ -61,6 +66,7 @@ const sampleSongData = [
     album: "Cut To The Feeling",
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+    genres: "Alt Rock"
   },
   {
     track_name: "Cut To The Feeling",
@@ -68,6 +74,7 @@ const sampleSongData = [
     album: "Cut To The Feeling",
     albumArt:
       "https://i.scdn.co/image/ab67616d0000b2737359994525d219f64872d3b1",
+    genres: "Alt Rock"
   }
 ];
 
@@ -178,7 +185,7 @@ function Dashboard() {
             >
               Top Songs from your friends
             </Typography>
-            <SongList musicData={sampleSongData} />
+            <SongList musicData={rcData} />
           </Grid>
           <Grid item xs={12}>
             <Typography
@@ -189,7 +196,7 @@ function Dashboard() {
             >
               Based on your groups listening history
             </Typography>
-            <SongList musicData={sampleSongData} />
+            <SongList musicData={rpData} />
           </Grid>
         </Grid>
       </Container>

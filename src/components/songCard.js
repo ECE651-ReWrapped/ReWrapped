@@ -13,7 +13,7 @@ function SongCard({ row }) {
                 {row.track_name}
             </TableCell>
             <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif", color: "#61758A" }}>{row.artists}</TableCell>
-            <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', color: "#121417" }} align="right"><Chip label="Alt Rock, Metal" /></TableCell>
+            <TableCell style={{ fontFamily: "Work Sans Variable, sans-serif", fontWeight: 'bold', color: "#121417" }} align="right"><Chip label={row.genres} /></TableCell>
         </TableRow>
     );
 }
