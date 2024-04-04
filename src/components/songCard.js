@@ -6,6 +6,7 @@ import Chip from '@mui/material/Chip';
 function SongCard({ row }) {
     return (
         <TableRow
+            data-testid="song-card"
             key={row.track_name}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
         >
