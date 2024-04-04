@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, Box, Typography } from '@mui/material';
 import axios from 'axios';
+import ResponsiveAppBar from "./appBar";
 
 const SelectedPlaylist = () => {
     const { playlist_name } = useParams();
@@ -41,6 +42,7 @@ const SelectedPlaylist = () => {
 
     return (
         <>
+            <ResponsiveAppBar />
             <Typography
                 padding="5px"
                 style={{ fontFamily: "sans-serif", fontWeight: 'bold', textAlign: 'center' }}
