@@ -1,14 +1,28 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Box, Button, TextField, Grid, Typography, Avatar, Link, FormControlLabel, Checkbox } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Grid,
+  Typography,
+  Avatar,
+  Link,
+  FormControlLabel,
+  Checkbox,
+} from "@mui/material";
 import { useFormik } from "formik";
 import { validationSchema } from "../utility/passwordValidator";
 // import { useAxios } from "../hooks/useAxios";
 // import { passwordValidation } from "../utility/passwordValidator";
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import { useDispatch } from "react-redux";
+import { userDetailsActions } from "../slices/user/user-details-slice";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const createUser = async (values) => {
     try {
       const res = await axios.post(
@@ -26,9 +40,10 @@ const Signup = () => {
           withCredentials: true,
         }
       );
-      console.log(res);
 
       if (res.status === 200) {
+        // store current user's email as global state
+        dispatch(userDetailsActions.setUserEmail(values.email));
         navigate("/dashboard");
       } else {
         // Handle non-200 HTTP status codes if needed
@@ -65,7 +80,7 @@ const Signup = () => {
         alignItems="center"
       >
         <Grid item>
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
           </Avatar>
         </Grid>
@@ -127,7 +142,7 @@ const Signup = () => {
             <FormControlLabel
               control={<Checkbox value="allowExtraEmails" color="primary" />}
               label="I want to receive inspiration, marketing promotions and updates via email."
-              sx={{ color: 'grey' }}
+              sx={{ color: "grey" }}
             />
           </Grid>
         </Grid>
@@ -139,20 +154,20 @@ const Signup = () => {
           style={{
             marginTop: 20,
             borderRadius: 25,
-            padding: '10px 20px',
-            fontWeight: 'bold',
-            boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-            backgroundColor: 'black',
-            color: 'white',
-            width: '100%',
+            padding: "10px 20px",
+            fontWeight: "bold",
+            boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+            backgroundColor: "black",
+            color: "white",
+            width: "100%",
           }}
         >
           Sign Up
         </Button>
-        <Grid container justifyContent="flex-end" sx={{mt:2}}>
+        <Grid container justifyContent="flex-end" sx={{ mt: 2 }}>
           <Grid item>
             <Link href="/" variant="body2">
-              Already an user? 
+              Already an user?
             </Link>
           </Grid>
         </Grid>
@@ -162,17 +177,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-// const { response, error, loading, refetch } = useAxios({
-//   axiosInstance: axios,
-//   method: "POST",
-//   url: "/register",
-//   requestData: {
-//     userData,
-//   },
-//   requestConfig: {
-//     headers: {
-//       //Custom headers, can't remember if I need this
-//     },
-//   },
-// });

@@ -10,6 +10,7 @@ import UserProfile from "./pages/Profile";
 import SetNewPassword from "./pages/SetNewPassword";
 import CreatePlaylist from "./pages/CreatePlaylist";
 import Recommendations from "./pages/Recommendations"
+import SelectedPlaylist from "./components/SelectedPlaylist";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,10 @@ const router = createBrowserRouter([
         <Recommendations />
       </ProtectedRoute>
     )
+  },
+  {
+    path: "/my-playlists/:playlist_name",
+    element: <SelectedPlaylist />
   }
 ]);
 
