@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 
-function ListeningTrendsGraph({ userId }) {
+function ListeningTrendsGraph({ userId }) { // NOSONAR
     const [listeningTrends, setListeningTrends] = useState({ categories: [], seriesData: [] });
 
     useEffect(() => {

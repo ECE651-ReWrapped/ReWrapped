@@ -128,7 +128,7 @@ function ResponsiveAppBar() {
               textDecoration: "none",
             }}
           >
-            SR
+            S.R
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
