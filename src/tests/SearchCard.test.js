@@ -84,10 +84,8 @@ describe('SearchCard', () => {
 
     fireEvent.click(screen.getByText('Add Playlist'));
 
-    const createPlaylistButton = screen.getAllByRole('button', { name: "Create a New Playlist" });
-
     await waitFor(() => {
-      expect(createPlaylistButton).toBeInTheDocument();
+      expect(screen.getByText("Create a new Playlist")).toBeInTheDocument();
     });
   });
 
