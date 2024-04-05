@@ -14,7 +14,7 @@ const exchangeSpotifyToken = async (code) => {
             new URLSearchParams({
                 grant_type: "authorization_code",
                 code: code,
-                redirect_uri: "http://localhost:3000/dashboard",
+                redirect_uri: "https://rewrapped.up.railway.app/dashboard",
                 client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
                 client_secret: process.env.REACT_APP_SPOTIFY_CLIENT_SECRET,
             }),
