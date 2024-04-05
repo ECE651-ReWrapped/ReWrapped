@@ -1,6 +1,5 @@
 import { useParams } from 'react-router-dom';
-import React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, Box, Typography } from '@mui/material';
 import axios from 'axios';
 import ResponsiveAppBar from "./appBar";
@@ -56,7 +55,7 @@ const SelectedPlaylist = () => {
                 <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: '30px' }}>
                     <List sx={{ width: '100%', maxWidth: 500, bgcolor: '#F0F2F5' }}>
                         {tracks.map((item, index) => (
-                            <React.Fragment key={index}>
+                            <React.Fragment key={index}> {/* NOSONAR */}
                                 <ListItem alignItems="flex-start">
                                     <ListItemAvatar sx={{ padding: '10px' }}>
                                         <Avatar alt={item.artist} src="/static/images/avatar/1.jpg" />

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Typography, Avatar, TextField, Button } from '@mui/material';
 import LockResetOutlinedIcon from '@mui/icons-material/LockResetOutlined';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import InvalidLink from '../components/InvalidLink';
 
@@ -31,30 +30,28 @@ const SetNewPassword = () => {
             }
         };
         validateToken();
-    }, [token]); 
+    }, [token]);
 
 
     const handleResetPasswordUpdate = async () => {
         // send request to backend to update password
         try {
             const res = await axios.put(
-            `${process.env.REACT_APP_API_LOCAL}/reset-password`,
-            {
-                urlToken : token, 
-                password : password,
-                confirmPassword : confirmPassword
-            },
-            {
-                headers: {
-                    "Content-Type": "application/json",
+                `${process.env.REACT_APP_API_LOCAL}/reset-password`,
+                {
+                    urlToken: token,
+                    password: password,
+                    confirmPassword: confirmPassword
                 },
-                withCredentials: true,
-            });
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    withCredentials: true,
+                });
 
             if (res.status === 200) {
                 navigate('/');
-            } else {
-                
             }
         } catch (err) {
             console.error(err);
@@ -64,33 +61,33 @@ const SetNewPassword = () => {
 
     return (
         <>
-        {tokenValid && <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                justifyContent: 'center',
-                minHeight: '100vh',
-                padding: '20px',
-                textAlign: 'center',
-            }}
+            {tokenValid && <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    minHeight: '100vh',
+                    padding: '20px',
+                    textAlign: 'center',
+                }}
             >
                 <Avatar sx={{ m: 1, bgcolor: "#C33271", width: 64, height: 64 }}>
                     <LockResetOutlinedIcon />
                 </Avatar>
                 <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2, mt: 4, color: '#333333' }}>
                     Enter your new password
-                </Typography>   
-                <Typography variant="subtitle1" color="textSecondary" sx={{ 
-                    mb: 2, 
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary" sx={{
+                    mb: 2,
                     width: '100%',
                     '@media (min-width: 600px)': {
-                        width: '50%', 
-                            },
-                    '@media (min-width: 960px)': {
-                        width: '25%', 
+                        width: '50%',
                     },
-                    }}
+                    '@media (min-width: 960px)': {
+                        width: '25%',
+                    },
+                }}
                 >
                     Must be atleast 8 characters
                 </Typography>
@@ -101,17 +98,17 @@ const SetNewPassword = () => {
                     id="password"
                     name="password"
                     value={password}
-                    onChange={e => {setPassword(e.target.value)}}
+                    onChange={e => { setPassword(e.target.value) }}
                     sx={{
-                        width: '100%', 
+                        width: '100%',
                         mb: 2,
 
                         '@media (min-width: 600px)': {
-                        width: '50%', 
+                            width: '50%',
                         },
 
                         '@media (min-width: 960px)': {
-                        width: '25%', 
+                            width: '25%',
                         },
                     }}
                 />
@@ -122,17 +119,17 @@ const SetNewPassword = () => {
                     id="confirm password"
                     name="confirm password"
                     value={confirmPassword}
-                    onChange={e => {setConfirmPassword(e.target.value)}}
+                    onChange={e => { setConfirmPassword(e.target.value) }}
                     sx={{
-                        width: '100%', 
+                        width: '100%',
                         mb: 2,
 
                         '@media (min-width: 600px)': {
-                        width: '50%', 
+                            width: '50%',
                         },
 
                         '@media (min-width: 960px)': {
-                        width: '25%', 
+                            width: '25%',
                         },
                     }}
                 />
@@ -149,23 +146,23 @@ const SetNewPassword = () => {
                         boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
                         backgroundColor: "#212121",
                         color: "white",
-                        width: '100%', 
+                        width: '100%',
                         textTransform: "none",
 
                         '@media (min-width: 600px)': {
-                        width: '50%', 
+                            width: '50%',
                         },
 
                         '@media (min-width: 960px)': {
-                        width: '25%', 
+                            width: '25%',
                         },
                     }}
-                    >
+                >
                     Reset Password
                 </Button>
-        </Box>}
-        {tokenValid === undefined && <p>Loading...</p>}
-        {tokenValid === false && <InvalidLink />}
+            </Box>}
+            {tokenValid === undefined && <p>Loading...</p>}
+            {tokenValid === false && <InvalidLink />}
         </>
     );
 };

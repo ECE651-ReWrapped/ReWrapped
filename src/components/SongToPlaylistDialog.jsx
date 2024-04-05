@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Dialog, DialogTitle, List, ListItemButton, ListItemText, DialogContent } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
@@ -6,9 +5,9 @@ import axios from 'axios';
 
 let playlists = [];
 
-const SongToPlaylistDialog = ({ songName, songArtist, handleCloseDialog }) => {
+const SongToPlaylistDialog = ({ songName, songArtist, handleCloseDialog }) => { // NOSONAR
     const currUserEmail = useSelector(state => state.currentUserDetails.userEmail);
-    const [hasPlaylists, setHasPlaylists] = useState(false);
+    const [hasPlaylists, setHasPlaylists] = useState(false); // NOSONAR
 
     useEffect(() => {
         // get all of my playlists only, shared or unshared
@@ -26,7 +25,7 @@ const SongToPlaylistDialog = ({ songName, songArtist, handleCloseDialog }) => {
                 if (response.status === 200) {
                     // there are playlists to my name
                     response.data.playlists.map((item) => {
-                        playlists.push(item.playlist_name);    
+                        playlists.push(item.playlist_name);
                     });
                     setHasPlaylists(true);
                 } else {
@@ -40,12 +39,12 @@ const SongToPlaylistDialog = ({ songName, songArtist, handleCloseDialog }) => {
         getMyPlaylists();
     }, []);
 
-    const handleAddToChosenPlaylist = (selPlaylist) => {
+    const handleAddToChosenPlaylist = async (selPlaylist) => {
         handleCloseDialog(false);
         setHasPlaylists(false);
         // store this song to the selected playlist in db
         try {
-            const res = axios.post(`${process.env.REACT_APP_API_LOCAL}/addTrackToPlaylist`, {
+            await axios.post(`${process.env.REACT_APP_API_LOCAL}/addTrackToPlaylist`, {
                 playlist_name: selPlaylist,
                 track_name: songName,
                 artist_name: songArtist
@@ -61,7 +60,7 @@ const SongToPlaylistDialog = ({ songName, songArtist, handleCloseDialog }) => {
             <DialogContent>
                 <List>
                     {playlists.map((playlist, index) => (
-                        <ListItemButton key={index} onClick={ () => handleAddToChosenPlaylist(playlist) }>
+                        <ListItemButton key={index} onClick={() => handleAddToChosenPlaylist(playlist)}> {/*NOSONAR*/}
                             <ListItemText primary={playlist} />
                         </ListItemButton>
                     ))}

@@ -13,8 +13,6 @@ import {
 } from "@mui/material";
 import { useFormik } from "formik";
 import { validationSchema } from "../utility/passwordValidator";
-// import { useAxios } from "../hooks/useAxios";
-// import { passwordValidation } from "../utility/passwordValidator";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import { useDispatch } from "react-redux";
 import { userDetailsActions } from "../slices/user/user-details-slice";

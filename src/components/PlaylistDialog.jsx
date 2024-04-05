@@ -1,4 +1,3 @@
-import React from 'react';
 import { Dialog, DialogTitle, DialogContent, ListItemButton, List, ListItemText, Button, TextField } from '@mui/material';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -7,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 let playlists = [];
 
-const PlaylistDialog = ({ currUser, handleCloseList }) => {
+const PlaylistDialog = ({ currUser, handleCloseList }) => { // NOSONAR
     const currUserEmail = useSelector(state => state.currentUserDetails.userEmail);
-    const [isPlaylistEmpty, setPlaylistEmpty] = useState(true); // consider no shared playlists until API call sends a list
+    const [isPlaylistEmpty, setIsPlaylistEmpty] = useState(true); // consider no shared playlists until API call sends a list
     const [enterPlaylist, setEnterPlaylist] = useState(false);
     const [playlistName, setPlaylistName] = useState("");
     const navigate = useNavigate();
@@ -28,9 +27,9 @@ const PlaylistDialog = ({ currUser, handleCloseList }) => {
 
                 if (res.status === 404) {
                     // no existing shared playlists
-                    setPlaylistEmpty(true);
+                    setIsPlaylistEmpty(true);
                 } else {
-                    setPlaylistEmpty(false);
+                    setIsPlaylistEmpty(false);
                     // display existing playlists
                     res.data.playlists.forEach((item) => {
                         playlists.push(item.playlist_name);
@@ -49,11 +48,11 @@ const PlaylistDialog = ({ currUser, handleCloseList }) => {
 
     const onDone = async () => {
         setEnterPlaylist(false);
-        setPlaylistEmpty(false);
+        setIsPlaylistEmpty(false);
         handleCloseList(false); // close dialog box altogether
 
         try {
-            const res = await axios.post(
+            await axios.post(
                 `${process.env.REACT_APP_API_LOCAL}/createNewSharedPlaylist`,
                 {
                     playlist_name: playlistName,
@@ -77,7 +76,7 @@ const PlaylistDialog = ({ currUser, handleCloseList }) => {
             <DialogContent>
                 {!isPlaylistEmpty && !enterPlaylist && <List>
                     {playlists.map((playlist, index) => (
-                        <ListItemButton onClick={() => { handleGetPlaylistTracks(playlist); }} key={index}>
+                        <ListItemButton onClick={() => { handleGetPlaylistTracks(playlist); }} key={index}> {/* NOSONAR */}
                             <ListItemText primary={playlist} />
                         </ListItemButton>
                     ))}

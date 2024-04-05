@@ -3,6 +3,8 @@ import Box from '@mui/material/Box';
 import ReactApexChart from "react-apexcharts";
 import axios from 'axios';
 
+
+
 function ListeningTrendsGraph({ userId }) {
     const [listeningTrends, setListeningTrends] = useState({ categories: [], seriesData: [] });
 
