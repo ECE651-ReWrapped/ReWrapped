@@ -41,7 +41,7 @@ const handleSpotifyConnect = () => {
   const authorizationEndpoint = "https://accounts.spotify.com/authorize";
   const queryParams = new URLSearchParams({
     client_id: process.env.REACT_APP_SPOTIFY_CLIENT_ID,
-    redirect_uri: "https://rewrapped.up.railway.app/dashboard",
+    redirect_uri: "http://localhost:3000/dashboard",
     scope:
       "user-read-private user-read-email user-top-read user-library-read playlist-read-private",
     response_type: "code",
