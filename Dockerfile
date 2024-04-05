@@ -13,4 +13,5 @@ COPY . .
 
 EXPOSE 80
 
-CMD ["yarn", "prod"]
+CMD ["yarn", "prod", "--host", "0.0.0.0", "--port", "${PORT:-3000}"]
+
