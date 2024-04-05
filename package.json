@@ -39,7 +39,7 @@
   },
   "scripts": {
     "start": "env-cmd -f .env react-scripts start",
-    "startDev": "env-cmd -f .env.dev react-scripts start",
+    "prod": "set PORT=80 && env-cmd -f .env react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
