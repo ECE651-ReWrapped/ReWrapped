@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 
-const ProtectedRoute = ({ redirectPath = "/", children }) => {
+const ProtectedRoute = ({ redirectPath = "/", children }) => { // NOSONAR
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 

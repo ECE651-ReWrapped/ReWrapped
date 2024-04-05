@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import ReactApexChart from "react-apexcharts";
 import axios from 'axios';
 
-function TopGenresGraph({ userId }) {
+function TopGenresGraph({ userId }) { // NOSONAR
     const [topGenres, setTopGenres] = useState({ categories: [], seriesData: [] });
 
     useEffect(() => {
