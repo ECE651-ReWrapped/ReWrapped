@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import SelectedPlaylist from '../components/SelectedPlaylist';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 jest.mock('axios');
 const mockedUseParams = jest.fn();
@@ -30,7 +31,11 @@ describe('SelectedPlaylist Component', () => {
     });
 
     test('displays tracks when data is fetched successfully', async () => {
-        render(<SelectedPlaylist />);
+        render(
+            <Router>
+                <SelectedPlaylist />
+            </Router>
+        );
 
         // Wait for the component to finish loading data
         const elem1 = screen.findByText('Track 1');
@@ -58,7 +63,9 @@ describe('SelectedPlaylist Component', () => {
             data: { tracks: [] },
         });
 
-        render(<SelectedPlaylist />);
+        render(<Router>
+            <SelectedPlaylist />
+        </Router>);
 
         // Expect to find a message indicating there are no tracks
         const message = await screen.findByText('This playlist has no tracks!');

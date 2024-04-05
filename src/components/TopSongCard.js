@@ -27,7 +27,7 @@ function TopSongCard({ mData }) {
                     <Avatar alt="album art" src={mData.thumbnail} />
                 </ListItemAvatar>
                 <ListItemText
-                    primary={mData.songName}
+                    primary={"🎲 - " + mData.songName}
                     secondary= {mData.artist+ " - " + mData.genres}
                 />
             </ListItem>
