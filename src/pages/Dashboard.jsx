@@ -169,7 +169,7 @@ function Dashboard() {
                 value={"+5%"}
                 subtitle={"Last 6 Months +5%"}
               />
-              <ListeningTrendsGraph userData={sampleListeningData} />
+              <ListeningTrendsGraph userId={name} />
             </Box>
             <Box sx={{ ml: 1 }}>
               <StatsCard
