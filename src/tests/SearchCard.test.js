@@ -5,6 +5,7 @@ import configureMockStore from 'redux-mock-store';
 import SearchCard from '../components/SearchCard';
 import { ToastContainer } from 'react-toastify';
 import axios from 'axios';
+import { BrowserRouter as Router } from 'react-router-dom'; // Import BrowserRouter for Link component
 
 // Mocks
 jest.mock('axios');
@@ -75,14 +76,18 @@ describe('SearchCard', () => {
   it('displays the PlaylistDialog when "Add Playlist" is clicked', async () => {
     render(
       <Provider store={store}>
-        <SearchCard user={mockUser} key={mockUser.user_id} />
+        <Router>
+          <SearchCard user={mockUser} key={mockUser.user_id} />
+        </Router>
       </Provider>
     );
 
     fireEvent.click(screen.getByText('Add Playlist'));
 
+    const createPlaylistButton = screen.getAllByRole('button', { name: "Create a New Playlist" });
+
     await waitFor(() => {
-      expect(screen.getByText('CREATE A NEW PLAYLIST')).toBeInTheDocument();
+      expect(createPlaylistButton).toBeInTheDocument();
     });
   });
 
